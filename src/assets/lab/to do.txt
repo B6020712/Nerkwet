@@ -1,0 +1,31 @@
+1. chang name of lab5 to "Encapsulation VLAN"
+
+2. อธิบายว่าแต่ละแลปคืออะไรบ้าง
+	- 2. ASSIGN IP ADDRESS : แลป 2 ข้อ 2
+	- 4. VLAN part 1 
+	- 5. VLAN part 2 : Encapsulation
+	- 6. IPV4
+	- 7. Routing Protocols
+	- 8. IPV6
+	- 9. DHCP , DNS and NAT (จากแลปใน cisco เรื่อง DHCP กับ NAT
+	- 10. WLC and LAP
+
+*** 3.เรียงข้อใหม่เป็น
+	- 2. CALCULATE IP ADDRESS and NETMASK : แลป 2 ข้อ 2
+	  > Solution checked
+	- 3. VLAN part 1 
+	  > check
+	- 4. VLAN part 2 : Encapsulation
+	  >
+	- 5. IPV4
+	  > Check
+	- 6. OSPF and EIGRP (จากแลปใน Cisco เรื่อง OSPF กับ EIGRP)
+	  > 
+	- 7. IPV6
+	  > 
+	- 8. DHCP , DNS and NAT (จากแลปใน cisco เรื่อง DHCP กับ NAT)
+	  > 
+	- 9. Port Security and ACL
+	  > 
+	- 10. WLC and LAP
+	  >
