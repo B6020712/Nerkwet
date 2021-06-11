@@ -15,6 +15,8 @@ import LAB8 from '../components/LAB8.vue'
 import LAB9 from '../components/LAB9.vue'
 import LAB10 from '../components/LAB10.vue'
 
+import LAB2_HW from '../components/LAB2_HW.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,16 +34,16 @@ const routes = [
   { path: '/lab9', component: LAB9 , meta: {requireAuth: true} }, 
   { path: '/lab10', component: LAB10 , meta: {requireAuth: true} },
 
-  /* { path: '/lab1_assignment', component: LAB1 , meta: {requireAuth: true} }, 
-  { path: '/lab2_assignment', name: 'LAB2', component: LAB2 , meta: {requireAuth: true} }, 
-  { path: '/lab3_assignment', component: LAB3 , meta: {requireAuth: true} }, 
-  { path: '/lab4_assignment', component: LAB4 , meta: {requireAuth: true} }, 
-  { path: '/lab5_assignment', component: LAB5 , meta: {requireAuth: true} }, 
-  { path: '/lab6_assignment', component: LAB6 , meta: {requireAuth: true} }, 
-  { path: '/lab7_assignment', component: LAB7 , meta: {requireAuth: true} }, 
-  { path: '/lab8_assignment', component: LAB8 , meta: {requireAuth: true} }, 
-  { path: '/lab9_assignment', component: LAB9 , meta: {requireAuth: true} }, 
-  { path: '/lab10_assignment', component: LAB10 , meta: {requireAuth: true} } */
+  // { path: '/lab1_assignment', component: LAB1 , meta: {requireAuth: true} }, 
+  { path: '/lab2_hw', name: 'LAB2_HW', component: LAB2_HW , meta: {requireAuth: true} }, 
+  // { path: '/lab3_assignment', component: LAB3 , meta: {requireAuth: true} }, 
+  // { path: '/lab4_assignment', component: LAB4 , meta: {requireAuth: true} }, 
+  // { path: '/lab5_assignment', component: LAB5 , meta: {requireAuth: true} }, 
+  // { path: '/lab6_assignment', component: LAB6 , meta: {requireAuth: true} }, 
+  // { path: '/lab7_assignment', component: LAB7 , meta: {requireAuth: true} }, 
+  // { path: '/lab8_assignment', component: LAB8 , meta: {requireAuth: true} }, 
+  // { path: '/lab9_assignment', component: LAB9 , meta: {requireAuth: true} }, 
+  // { path: '/lab10_assignment', component: LAB10 , meta: {requireAuth: true} }
 ]
 
 const router = new VueRouter({

@@ -53,9 +53,7 @@
                 6. ทำให้ PC2 ping หา PC4 ได้ <br/>        
               </p>
 
-              <v-divider></v-divider>
-
-              <div>
+              <!-- <div>
                 <br /><h1 class="text--red">*** สำหรับทดสอบ Download (ไฟล์ตัวอย่างเป็นไฟล์ของแลป 3-1) ***</h1><br />
                 <v-row>
                   <v-col cols="2"><h3 class="text--primary"><strong>ไฟล์การบ้าน:</strong></h3></v-col>
@@ -71,9 +69,24 @@
                 <div>คำถามมีทั้งหมด 2 ข้อ เป็นแบบ choice</div>
                 <div>เมื่อทำเสร็จแล้วจะสามารถส่งไฟล์ได้</div><br />
                 <v-btn color="indigo" @click="requestQuest">Question</v-btn>
+              </div> -->
+
+              <div class="d-flex justify-space-around mb-6 outlined">
+                <v-spacer></v-spacer>
+                <v-btn @click="labresult" color="red">Result</v-btn>
+                <v-spacer></v-spacer>
+                <v-btn @click="gotoHomework" color="primary">Homework</v-btn>
+                <v-spacer></v-spacer>
               </div>
 
-              <div v-if="readyToDoQuest">
+              <div v-if="result" class="text--primary" style="text-align: left">
+                <v-divider></v-divider><br />
+                <h1>ผลลัพธ์ของการทำแลป</h1><br />
+                <div>result : </div>
+              </div>
+              
+
+              <!-- <div v-if="readyToDoQuest">
                 <br />
                 <h1 class="text--primary" style="text-align: center">คำถามก่อนส่ง Assignment</h1>
                 <v-radio-group v-model="quest1.title">
@@ -85,15 +98,14 @@
                   <v-radio v-for="citem in choice2" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
                 </v-radio-group>
 
-                <!-- File input -->
                 <div v-if="passSign">
                   <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
                   <v-row>
                     <v-col cols="8">
-                      <!-- <template><v-file-input show-size counter v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template> -->
+                      <template><v-file-input show-size counter v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
                       <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
                       <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
-                      <!-- <div v-if="uploadingFile">Progress : {{uploadValue.toFixed() + "%"}} <progress :value="uploadValue" max="100"></progress></div> -->
+                      <div v-if="uploadingFile">Progress : {{uploadValue.toFixed() + "%"}} <progress :value="uploadValue" max="100"></progress></div>
                     </v-col>
                     <v-col cols="2">
                       <v-btn color="primary" @click="uploadFile">Upload<v-icon>mdi-file-upload-outline</v-icon></v-btn>
@@ -109,8 +121,7 @@
                   <login-component v-bind:storeToken="access_Token" />
                   <div class="pa-2 outlined"><v-btn color="indigo" @click="ClassroomConnect">Classroom</v-btn></div>
                 </div>
-                <!-- end here -->
-              </div>
+              </div> -->
             </v-card-subtitle>
           </v-row>
         </v-card>
@@ -133,6 +144,7 @@ export default {
   components: { LoginComponent },
   data() {
     return {
+      result: false,
       access_Token: '',
       downLoadURL: '',
       readyToDoQuest: false,
@@ -246,9 +258,13 @@ export default {
         storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
-    downloadFile() {
+    labresult() {
+      return this.result = true;
     },
-    requestQuest() { this.readyToDoQuest = true; },
+    gotoHomework() {
+      this.$router.push('/lab2_hw');
+    },
+    // requestQuest() { this.readyToDoQuest = true; },
     ClassroomConnect() {
       var courseId = 343458567331;
       var courseWorkId = 343458567494;
