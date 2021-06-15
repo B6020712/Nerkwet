@@ -15,7 +15,15 @@ import LAB8 from '../components/LAB8.vue'
 import LAB9 from '../components/LAB9.vue'
 import LAB10 from '../components/LAB10.vue'
 
+import LAB1_HW from '../components/LAB1_HW.vue'
 import LAB2_HW from '../components/LAB2_HW.vue'
+import LAB3_HW from '../components/LAB3_HW.vue'
+import LAB4_HW from '../components/LAB4_HW.vue'
+import LAB5_HW from '../components/LAB5_HW.vue'
+import LAB6_HW from '../components/LAB6_HW.vue'
+import LAB7_HW from '../components/LAB7_HW.vue'
+import LAB8_HW from '../components/LAB8_HW.vue'
+import LAB9_HW from '../components/LAB9_HW.vue'
 
 Vue.use(VueRouter)
 
@@ -34,16 +42,16 @@ const routes = [
   { path: '/lab9', component: LAB9 , meta: {requireAuth: true} }, 
   { path: '/lab10', component: LAB10 , meta: {requireAuth: true} },
 
-  // { path: '/lab1_assignment', component: LAB1 , meta: {requireAuth: true} }, 
+  { path: '/lab1_hw', component: LAB1_HW , meta: {requireAuth: true} }, 
   { path: '/lab2_hw', name: 'LAB2_HW', component: LAB2_HW , meta: {requireAuth: true} }, 
-  // { path: '/lab3_assignment', component: LAB3 , meta: {requireAuth: true} }, 
-  // { path: '/lab4_assignment', component: LAB4 , meta: {requireAuth: true} }, 
-  // { path: '/lab5_assignment', component: LAB5 , meta: {requireAuth: true} }, 
-  // { path: '/lab6_assignment', component: LAB6 , meta: {requireAuth: true} }, 
-  // { path: '/lab7_assignment', component: LAB7 , meta: {requireAuth: true} }, 
-  // { path: '/lab8_assignment', component: LAB8 , meta: {requireAuth: true} }, 
-  // { path: '/lab9_assignment', component: LAB9 , meta: {requireAuth: true} }, 
-  // { path: '/lab10_assignment', component: LAB10 , meta: {requireAuth: true} }
+  { path: '/lab3_hw', component: LAB3_HW , meta: {requireAuth: true} }, 
+  { path: '/lab4_hw', component: LAB4_HW , meta: {requireAuth: true} }, 
+  { path: '/lab5_hw', component: LAB5_HW , meta: {requireAuth: true} }, 
+  { path: '/lab6_hw', component: LAB6_HW , meta: {requireAuth: true} }, 
+  { path: '/lab7_hw', component: LAB7_HW , meta: {requireAuth: true} }, 
+  { path: '/lab8_hw', component: LAB8_HW , meta: {requireAuth: true} }, 
+  { path: '/lab9_hw', component: LAB9_HW , meta: {requireAuth: true} }, 
+  // { path: '/lab10_hw', component: LAB10 , meta: {requireAuth: true} }
 ]
 
 const router = new VueRouter({

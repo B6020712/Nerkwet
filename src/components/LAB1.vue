@@ -2,12 +2,13 @@
   <v-card class="mx-auto" max-width="1000" min-height="100">
     <br/>
     <p class="display-3 mb-3 text-center">LAB 1</p>
-    <p class="title font-regular text-center">Basic Configuration Commands</p>
+    <p class="title font-regular text-center">Basic Configuration</p>
     <v-row justify="center">
       <v-img max-width="400" min-height="100" src="@/assets/lab/labpic/1.png"></v-img>
     </v-row>
 
-    <v-stepper class="mt-12" v-model="e1" non-linear value="1" :alt-labels="altLabels">
+    <!-- <v-stepper class="mt-12" v-model="e1" non-linear value="1" :alt-labels="altLabels"> -->
+    <v-stepper v-model="e1" non-linear value="10">
       <v-stepper-header>
         <v-stepper-step complete editable step="1">brief</v-stepper-step>
         <v-divider></v-divider>

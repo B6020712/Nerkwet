@@ -1,137 +1,78 @@
 <template>
-  <v-card class="mx-auto" max-width="1000" min-height="100">
-    <!-- HEADER 1 -->
-    <p class="display-3 mb-3 text-center">LAB 8</p>
-    <p class="title font-regular text-center">Routing Protocols part 2</p>
+  <div>
+    <v-row>
+      <v-col width="30%">
+        <br />
+        <v-card class="mx-auto" max-width="900px" min-height="100px">
+          <br />
+          <div class="display-3 mb-3 text-center">LAB 8</div>
+          <div class="title font-regular text-center">NAT and Network Services</div>
 
-    <!-- brief -->
-    <v-row align="center" justify="center">
-      <v-card-text>
-        <p class="display-2 font-weight-bold mb-3 text--primary">Brief Lab</p>
-        <p class="subtitle-1 text--primary">
-          แลปนี้จะเกี่ยวกับ protocol OSPF และ EIGRP<br/>
-        </p>
-        <p class="subtitle-1" align="center">
-          <v-img min-width="100" min-height="100" src="@/assets/lab/lab8/lab8-1.png"></v-img><br/>
-          figure 1 - lab 8
-        </p>
-        <p class="subtitle-1" align="center">
-          <v-img min-width="100" min-height="100" src="@/assets/lab/lab8/lab8-2-a.png"></v-img><br/>
-          figure 2 - IntraA
-        </p>
-        <p class="subtitle-1" align="center">
-          <v-img min-width="100" min-height="100" src="@/assets/lab/lab8/lab8-2-b.png"></v-img><br/>
-          figure 3 - IntraB
-        </p>
-      </v-card-text>
+          <v-row align="center" justify="center">
+            <v-card-text>
+              <p class="subtitle-1 text--primary">
+                <v-img max-width="1100" min-height="100" src="@/assets/lab/labpic/8.png"></v-img><br/>
+              </p>
+            </v-card-text>
+          </v-row>
+        </v-card>
+      </v-col>
+
+      <v-col width="70%">
+        <br />
+        <v-card class="mx-auto" max-width="900px" min-height="100px">
+          <v-row align="center" justify="center">
+            <v-card-title>
+              <p class="headline text--primary text-center">อธิบายแลป</p>
+            </v-card-title>
+            <v-card-subtitle>
+              <p class="subtitle-1 text--primary text-center">
+                - - - - - - - - - - - - - - - - - - - Right Group - - - - - - - - - - - - - - - - - - -<br/>
+              </p>
+              <p class="subtitle-1 text--primary">
+              Right Group ได้รับ Block of address จาก ISP เริ่มที่ 192.168.1.0/26 โดย Right Group มี่ HOST ทั้งหมด 61 เครื่อง <br/>
+              สิ่งที่ต้องทำคือ<br/>
+              1. Interface ของ Router แต่ละสาขาเป็น IP Address แรกที่ใช้ได้<br/>
+              2. จัดสรร IP Address โดยให้ PC1 เป็น Address แรกที่ใช้ได้ และ PC2 เป็น IP Address สุดท้ายที่ใช้ได้
+              </p>
+              <p class="subtitle-1">
+                คำสั่งที่ใช้คือ<br/>
+                Router(config)# interface g0/0 หรือ Router(config)# interface g0/1<br/>
+                Router(config-if)# ip address 192.168.x.x 255.255.x.x<br/>
+                Router(config-if)# no shutdown<br/>
+              </p>
+              <p class="subtitle-1 text--primary text-center">
+                - - - - - - - - - - - - - - - - - - - Left Group - - - - - - - - - - - - - - - - - - -<br/>
+              </p>
+              <p class="subtitle-1 text--primary">
+                Left Group ได้รับ Block of Address จาก ISP เริ่มที่ 172.16.0.0/26 โดย Left Group มี่ HOST ทั้งหมด 61 เครื่อง <br/>
+                สิ่งที่ต้องทำคือ<br/>
+                3. Interface ของ Router แต่ละสาขาเป็น IP Address แรกที่ใช้ได้<br/>
+                4. จัดสรร IP Address โดยให้ PC3 เป็น Address แรกที่ใช้ได้ และ PC4 เป็น IP Address สุดท้ายที่ใช้ได้<br/>
+                5. ทำให้ PC1 ping หา PC3 ได้ <br/>        
+                6. ทำให้ PC2 ping หา PC4 ได้ <br/>        
+              </p>
+
+              <div class="d-flex justify-space-around mb-6 outlined">
+                <v-spacer></v-spacer>
+                <v-btn @click="labresult" color="red">Result</v-btn>
+                <v-spacer></v-spacer>
+                <v-btn @click="gotoHomework" color="primary">Homework</v-btn>
+                <v-spacer></v-spacer>
+              </div>
+
+              <div v-if="result" class="text--primary" style="text-align: left">
+                <v-divider></v-divider><br />
+                <h1>ผลลัพธ์ของการทำแลป</h1><br />
+                <div>result : </div>
+              </div>
+            </v-card-subtitle>
+          </v-row>
+        </v-card>
+      </v-col>
+      <!-- End Here -->
     </v-row>
-    <br/>
-    
-    <v-row align="center" justify="center">
-      <v-card-title>
-        <p class="headline text--primary">อธิบายแลป</p>
-      </v-card-title>
-      <v-card-subtitle>
-        <p class="subtitle-1 text--primary">
-          1. ที่ฝั่งซ้ายรวมถึง Intra A จะใช้ EIGRP เป็น AS number 100<br/>
-          1.1 กำหนดค่า EIGRP ที่ Router2 ดังนี้ (กำหนดค่าคล้ายกับ OSPF ใช้ network address และ wildcard mask ของ interface)<br/>
-        </p>
-        <p class="subtitle-1">
-          Router(config)# router eigrp 100<br/>
-          Router(config-router)# network 8.8.8.0 0.0.0.255<br/>
-          Router(config-router)# network 2.2.3.0 0.0.0.255<br/>
-          Router(config-router)# network 2.2.1.0 0.0.0.255<br/>
-          Router(config-router)# no auto-summary<br/>
-        </p>
-        <p class="subtitle-1 text--primary">
-          1.2 กำหนดค่า EIGRP ที่ Router0 และ Router1 จากตัวอย่าง Router2<br/><br/>
-
-          2 ที่ฝั่งขวารวมถึง Intra B จะใช้ OSPF (แบบมีหลาย Area) โดยให้เป็น ProcessID 10<br/>
-          2.1 กำหนดค่า Router7 ด้วย OSPF ดังนี้<br/>
-        </p>
-        <p class="subtitle-1">
-          Router(config)# router ospf 10<br/>
-          Router(config-router)# network 8.8.9.0 0.0.0.255 area 0<br/>
-          Router(config-router)# network 10.0.0.0 0.0.0.255 area 10<br/>
-          Router(config-router)# network 10.0.3.0 0.0.0.255 area 20<br/>
-        </p>
-        <p class="subtitle-1 text--primary">
-          2.2 กำหนดค่า Router5 ด้วย OSPF ดังนี้<br/>
-        </p>
-        <p class="subtitle-1">
-          Router(config)# router ospf 10<br/>
-          Router(config-router)# network 10.0.1.0 0.0.0.255 area 10<br/>
-          Router(config-router)# network 10.0.0.0 0.0.0.255 area 10<br/>
-          Router(config-router)# network 10.0.4.0 0.0.0.255 area 5<br/>
-        </p>
-        <p class="subtitle-1 text--primary">
-          2.3 ทดลองกำหนดค่าให้ Router6 โดยมี network 10.0.4.0 0.0.0.255 เป็น area 5, network 10.0.2.0 0.0.0.255 เป็น area 20 และ network 10.0.3.0 0.0.0.255 เป็น area 20<br/><br/>
-          2.4 ทดลองกำหนดค่าให้ Router8 โดยมี network 10.0.1.0 0.0.0.255 เป็น area 10, network 10.0.2.0 0.0.0.255 เป็น area 20 และ network 172.55.1.0 0.0.0.255 เป็น area 20<br/><br/>
-          3. สุดท้ายให้ Intra ทั้งสองทำการแลกเปลี่ยน Routing (OSPF & EIGRP Redistribution) หรือทำการเชื่อมต่อกันด้วย Backbone<br/>
-          3.1 วิธีการแลกเปลี่ยน Routing table ของ EIGRP กับ OSPF<br/>
-        </p>
-        <p class="subtitle-1">
-          <strong>3.1.1วิธีการแลกเปลี่ยน Routing แบบ redistribute OSPF routes into EIGRP<br/></strong>
-          Router(config)#router eigrp (EIGRP ID)<br/>
-          Router(config-router) # redistribute ospf (OSPF procees ID) metric 1000 33 255 1 1500<br/><br/>
-          <strong>3.1.2 วิธีการแลกเปลี่ยน Routing แบบ redistribute EIGRP routes into OSPF<br/></strong>
-          Router(config)#router ospf (OSPF procees ID)<br/>
-          Router(config-router) # redistribute eigrp (EIGRP ID) subnets<br/><br/>
-          <strong>3.1.3 กำหนดค่า Redistribution สำหรับ OSPF และ EIFRP ที่ Router4 ดังนี้<br/></strong>
-          Router(config)#router eigrp 100<br/>
-          Router(config-router)# network 8.8.8.0 0.0.0.255<br/>
-          Router(config-router)# redistribute ospf 10 metric 1000 33 255 1 1500<br/>
-          Router(config-router)# exit<br/>
-          Router(config)# router ospf 10<br/>
-          Router(config-router)# network 8.8.9.0 0.0.0.255 area 0<br/>
-          Router(config-router)# redistribute eigrp 100 subnets<br/>
-        </p>
-        <p class="subtitle-1 text--primary" align="center">
-          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        </p>
-        <p class="subtitle-1 text--primary">
-          4. สิ่งที่ต้องทำให้ได้ในแลปนี้คือ<br/>
-          4.1 ที่ Router4 ต้องมีการเรียนรู้ subnet จาก intra A (172.16.1.0/24) และ intra B (172.55.1.0/24)<br/>
-          4.2 ที่ Router2 ต้องมีจุดที่ EIGRP ได้จากการแลกเปลี่ยนกับ OSPF<br/>
-          4.3 ที่ Router7 ต้องมีจุดที่ OSPF ได้จากการแลกเปลี่ยนกับ EIGRP<br/>
-          4.4 PC0 สามารถติดต่อไปยัง PC1 ได้ (Ping หรือ tracert ก็ได้)<br/>
-        </p>
-        <v-radio-group v-model="lab8.no1">
-          <template v-slot:label>
-            <div>เลือกคำตอบที่ <strong>ถูกต้อง</strong></div>
-          </template>
-          <v-radio value="True">
-            <template v-slot:label>
-              <div>ข้อนี้ <strong class="success--text">ถูกต้อง</strong></div>
-            </template>
-          </v-radio>
-          <v-radio value="Wrong">
-            <template v-slot:label>
-              <div>ข้อนี้ <strong class="primary--text">ผิด</strong></div>
-            </template>
-          </v-radio>
-        </v-radio-group>
-
-        <v-radio-group v-model="lab8.no2">
-          <template v-slot:label>
-            <div>เลือกคำตอบที่ <strong>ถูกต้อง</strong></div>
-          </template>
-          <v-radio value="True">
-            <template v-slot:label>
-              <div>ข้อนี้ <strong class="success--text">ถูกต้อง</strong></div>
-            </template>
-          </v-radio>
-          <v-radio value="Wrong">
-            <template v-slot:label>
-              <div>ข้อนี้ <strong class="primary--text">ผิด</strong></div>
-            </template>
-          </v-radio>
-        </v-radio-group>
-        <v-btn color="red" @click="saveResult">Check</v-btn>
-        <v-btn color="primary" @click="toLab9">LAB 9</v-btn>
-      </v-card-subtitle>
-    </v-row>
-  </v-card>
+  </div>
 </template>
 
 <script>
@@ -141,10 +82,7 @@ import 'firebase/auth';
 export default {
   data() {
     return {
-      lab8: [{
-        no1: '',
-        no2: '',
-      }],
+      result : false,
       user : {email : ''},
     }
   },
@@ -157,17 +95,8 @@ export default {
     })
   },
   methods: {
-    toLab9() {
-      this.$router.push("/lab9");
-    },
-    // saveResult() {
-    //   lab8Ref.push({
-    //     email: this.email
-    //   }).child('lab_answer8').push({
-    //     lab8_no1: this.lab8.no1,
-    //     lab8_no2: this.lab8.no2,
-    //   })
-    // }
+    labresult() { return this.result = true; },
+    gotoHomework() { this.$router.push('/lab8_hw'); },
   }
 };
 </script>

@@ -6,7 +6,7 @@
         <v-card class="mx-auto" max-width="900px" min-height="100px">
           <br />
           <div class="display-3 mb-3 text-center">LAB 2</div>
-          <div class="title font-regular text-center">IP PLANNING</div>
+          <div class="title font-regular text-center">IP Addressing</div>
 
           <v-row align="center" justify="center">
             <v-card-text>

@@ -4,27 +4,29 @@
     <p class="display-3 mb-3 text-center">Before Lab</p>
     <p class="title font-regular text-center">ก่อนที่เราจะเริ่มทำแลปที่ 1 เราจะต้องเตรียมโปรแกรมที่ชื่อว่า Cisco Packet Tracer</p>
 
-    <v-stepper v-model="e1">
+    <!-- <v-stepper v-model="e1"> -->
+    <v-stepper v-model="e1" non-linear value="10">
       <v-stepper-header>
-        <v-stepper-step :complete="e1 > 1" step="1">1</v-stepper-step>
+        <!-- <v-stepper-step :complete="e1 > 1" step="1">1</v-stepper-step> -->
+        <v-stepper-step complete editable step="1">1</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 2" step="2">2</v-stepper-step>
+        <v-stepper-step complete editable step="2">2</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 3" step="3">3</v-stepper-step>
+        <v-stepper-step complete editable step="3">3</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 4" step="4">4</v-stepper-step>
+        <v-stepper-step complete editable step="4">4</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 5" step="5">5</v-stepper-step>
+        <v-stepper-step complete editable step="5">5</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 6" step="6">6</v-stepper-step>
+        <v-stepper-step complete editable step="6">6</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 7" step="7">7</v-stepper-step>
+        <v-stepper-step complete editable step="7">7</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 8" step="8">8</v-stepper-step>
+        <v-stepper-step complete editable step="8">8</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step :complete="e1 > 9" step="9">9</v-stepper-step>
+        <v-stepper-step complete editable step="9">9</v-stepper-step>
         <v-divider></v-divider>
-        <v-stepper-step step="10">10</v-stepper-step>
+        <v-stepper-step complete editable step="10">10</v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>

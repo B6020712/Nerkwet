@@ -1,61 +1,59 @@
 <template>
-  <div>
-    <div>
-      <br /><h1 class="text--red">*** สำหรับทดสอบ Download (ไฟล์ตัวอย่างเป็นไฟล์ของแลป 3-1) ***</h1><br />
-      <v-row>
-        <v-col cols="2"><h3 class="text--primary"><strong>ไฟล์การบ้าน:</strong></h3></v-col>
-        <v-col><h3 style="text-align: left"><a :href='downLoadURL'>คลิกเพื่อดาว์นโหลดไฟล์การบ้าน</a></h3></v-col>
-      </v-row><br />
-    </div>
-    
-    <v-divider></v-divider>
+  <v-card class="mx-auto" max-width="700px">
+    <br/>
+    <v-row>
+      <v-card-text>
+        <h1 style="text-align: center">Assignment : LAB 2</h1><br/>
+        <h3 class="text--primary" style="text-align: center"><strong>ไฟล์การบ้าน:</strong> <a :href='downLoadURL'>คลิกเพื่อดาว์นโหลดไฟล์การบ้าน</a></h3><br/>
+        <v-divider></v-divider>
+      </v-card-text>
 
-    <div v-if="!readyToDoQuest">
-      <br />
-      <h1>คำถามหลังการทดลอง</h1><br />
-      <div>คำถามมีทั้งหมด 2 ข้อ เป็นแบบ choice</div>
-      <div>เมื่อทำเสร็จแล้วจะสามารถส่งไฟล์ได้</div><br />
-      <v-btn color="indigo" @click="requestQuest">Question</v-btn>
-    </div>
+      <v-card-text>
+        <div v-if="!readyToDoQuest">
+          <h2 style="text-align: center">คำถามก่อนส่ง Assignment</h2>
+          <div style="text-align: center">คำถามมีทั้งหมด 2 ข้อ เป็นแบบ choice</div>
+          <div style="text-align: center">หากตอบคำถามถูกทุกข้อจะสามารถส่งไฟล์ได้</div><br />
+          <div class="d-flex justify-space-around mb-6 outlined">
+            <v-spacer></v-spacer><v-btn color="indigo" @click="requestQuest">Question</v-btn><v-spacer></v-spacer>
+          </div>
+        </div>
 
-    <div v-if="readyToDoQuest">
-      <br />
-      <h1 class="text--primary" style="text-align: center">คำถามก่อนส่ง Assignment</h1>
-      <v-radio-group v-model="quest1.title">
-        <div>{{quest1.headermsg}}</div>
-        <v-radio v-for="citem in choice1" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
-      </v-radio-group>
-      <v-radio-group v-model="quest2.title">
-        <div>{{quest2.headermsg}}</div>
-        <v-radio v-for="citem in choice2" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
-      </v-radio-group>
+        <div v-if="readyToDoQuest">
+          <h1 class="text--primary" style="text-align: center">คำถามก่อนส่ง Assignment</h1>
+          <v-radio-group v-model="quest1.title" style="margin-left: 10px">
+            <div>{{quest1.headermsg}}</div>
+            <v-radio v-for="citem in choice1" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
+          </v-radio-group>
+          <v-radio-group v-model="quest2.title" style="margin-left: 10px">
+            <div>{{quest2.headermsg}}</div>
+            <v-radio v-for="citem in choice2" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
+          </v-radio-group>
 
-      <!-- File input -->
-      <div v-if="passSign">
-        <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
-        <v-row>
-          <v-col cols="8">
-            <!-- <template><v-file-input show-size counter v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template> -->
+          <div v-if="checked" class="d-flex justify-space-around mb-6 outlined">
+            <v-btn color="red" @click="checkResult(quest1.title, quest2.title)">Check</v-btn>
+            <!-- <login-component v-bind:storeToken="access_Token" /> -->
+            <!-- <div class="pa-2 outlined"><v-btn color="indigo" @click="sendToGoogleClassroom">Classroom</v-btn></div> -->
+          </div>
+
+          <div v-if="passSign">
+            <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
             <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
             <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
-            <!-- <div v-if="uploadingFile">Progress : {{uploadValue.toFixed() + "%"}} <progress :value="uploadValue" max="100"></progress></div> -->
-          </v-col>
-          <v-col cols="2">
-            <v-btn color="primary" @click="uploadFile">Upload<v-icon>mdi-file-upload-outline</v-icon></v-btn>
-          </v-col>
-          <v-col cols="2">
-            <v-btn color="green" @click="toLab3">LAB 3<v-icon>mdi-arrow-right-bold-box-outline</v-icon></v-btn>
-          </v-col>
-        </v-row>
-      </div>
-
-      <div class="d-flex justify-space-around mb-6 outlined">
-        <div v-if="checked" class="pa-2 outlined"><v-btn color="red" @click="checkResult(quest1.title, quest2.title)">Check</v-btn></div>
-        <login-component v-bind:storeToken="access_Token" />
-        <div class="pa-2 outlined"><v-btn color="indigo" @click="ClassroomConnect">Classroom</v-btn></div>
-      </div>
-    </div>
-  </div>
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-btn color="indigo" @click="toLab2"><v-icon>mdi-arrow-left-bold-box-outline</v-icon>LAB 2</v-btn>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" @click="uploadFile">Upload<v-icon>mdi-file-upload-outline</v-icon></v-btn>
+              <v-spacer></v-spacer>
+              <v-btn color="green" @click="toLab3">LAB 3<v-icon>mdi-arrow-right-bold-box-outline</v-icon></v-btn>
+              <v-spacer></v-spacer>
+            </v-row>
+          </div>
+          <br/>
+        </div>
+      </v-card-text>
+    </v-row>
+  </v-card>
 </template>
 
 <script>
@@ -64,14 +62,14 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { storage } from '../main';
 import LoginComponent from './LoginComponent.vue';
-const gaxios = require('gaxios');
+// const gaxios = require('gaxios');
 
 /* eslint-disable */
 export default {
   components: { LoginComponent },
   data() {
     return {
-      access_Token: '',
+      // access_Token: '',
       downLoadURL: '',
       readyToDoQuest: false,
       name: 'LAB2',
@@ -133,18 +131,21 @@ export default {
         this.refreshToken = user.refreshToken;
       }
 
-      gaxios.instance.defaults = {
-        baseURL: 'https://classroom.googleapis.com/v1/',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          Authorization: `${access_Token}`
-          // Authorization: `Bearer ${access_Token}`
-        }
-      }
+      // gaxios.instance.defaults = {
+      //   baseURL: 'https://classroom.googleapis.com/v1/',
+      //   headers: {
+      //     'Access-Control-Allow-Origin': '*',
+      //     Authorization: `${access_Token}`
+      //     // Authorization: `Bearer ${access_Token}`
+      //   }
+      // }
       
     })
   },
   methods: {
+    toLab2() { 
+      this.$router.push("/lab2"); 
+    },
     toLab3() { 
       this.$router.push("/lab3"); 
     },
@@ -166,6 +167,7 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
+      // const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
       var metadata = { contentType: this.myFiles.type };
       const uploadTask = storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
@@ -184,39 +186,35 @@ export default {
         storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
-    downloadFile() {
-    },
     requestQuest() { this.readyToDoQuest = true; },
-    ClassroomConnect() {
-      var courseId = 343458567331;
-      var courseWorkId = 343458567494;
-      var id = 'Cg4ItcCBm7ABEMaq573_CQ'; // bosslove242@gmail.com
-      const url = 'courses/' + courseId + '/courseWork/' + courseWorkId + '/studentSubmissions/' + id + ':turnIn';
-      // const url = 'courses/' + courseId + '/courseWork';
-      async function quickstart() {
-        console.log("This is URL = " + url);
-        // const res = await gaxios.request({url});
+    // sendToGoogleClassroom() {
+    //   /* modifyAttachment คือการแนบไฟล์แต่ไม่ได้ส่ง ส่วนการ TurnIn คือการส่งแต่ไม่สามารถแนบอะไรไปได้ */
+    //   var courseId = 343458567331;
+    //   var courseWorkId = 360470445867; // Lab 7 (From Google Apis)
+    //   var id = 'Cg4ItcCBm7ABEKv-2e2-Cg'; // bosslove242@gmail.com Note : User Id อาจเปลี่ยนไปตลอด
+    //   const url = 'courses/' + courseId + '/courseWork/' + courseWorkId + '/studentSubmissions/' + id + ':turnin';
+    //   // const url = 'courses/' + courseId + '/courseWork/' + courseWorkId + '/studentSubmissions/' + id + ':modifyAttachments';
+    //   // const url = 'courses/' + courseId + '/courseWork';
+    //   async function attachFileToClassroom() {
+    //     console.log("This is URL = " + url);
+    //     // const res = await gaxios.request({url});
 
-        /* เจอเออเร่อแล้ว ต้องอ่านที่ npm ของ gaxios ตรง content-head */
-        const res = await gaxios.request({
-          url: url,
-          method: "POST",
-          // headers: { 
-          //   'Access-Control-Allow-Origin': '*',
-          //  }
-        })
-        console.log(`status: ${res.status}`);
-        console.log('data:');
-        console.log(res.data);
-      }
-      quickstart().catch(error => console.log("error occured in Lab2 ClassroomConnect(), " + error));
-    }
+    //     const res = await gaxios.request({
+    //       url: url,
+    //       method: "POST",
+    //     })
+    //     console.log(`status: ${res.status}`);
+    //     console.log('data:');
+    //     console.log(res.data);
+    //   }
+    //   attachFileToClassroom().catch(error => console.log("error occured in Lab2 attachFileToClassroom(), " + error));
+    // }
   }
 };
 </script>
 
 <style scoped>
-.v-progress-circular {
-  margin: 1rem;
-}
+  .v-progress-circular {
+    margin: 1rem;
+  }
 </style>
