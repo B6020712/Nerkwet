@@ -21,7 +21,7 @@
                   <p class="caption mt-1">{{email}}</p>
                   <v-divider></v-divider><br/>
                   <v-btn @click="signOut">Sign Out</v-btn>
-                  <v-btn @click="connectToClassroom">Show Classroom</v-btn>
+                  <!-- <v-btn @click="connectToClassroom">Show Classroom</v-btn> -->
                 </div>
               </v-list-item-content>
             </v-card>
@@ -80,10 +80,10 @@ export default {
   methods: {
     signIn() {
       const provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('https://www.googleapis.com/auth/userinfo.email');
-      provider.addScope('https://www.googleapis.com/auth/classroom.rosters.readonly');
-      provider.addScope('https://www.googleapis.com/auth/classroom.courses.readonly');
-      provider.addScope('https://www.googleapis.com/auth/classroom.coursework.me');
+      // provider.addScope('https://www.googleapis.com/auth/userinfo.email');
+      // provider.addScope('https://www.googleapis.com/auth/classroom.rosters.readonly');
+      // provider.addScope('https://www.googleapis.com/auth/classroom.courses.readonly');
+      // provider.addScope('https://www.googleapis.com/auth/classroom.coursework.me');
       firebase.auth().signInWithPopup(provider).then((result) => {
         /** @type {firebase.auth.OAuthCredential} */
         var credential = result.credential;
@@ -122,16 +122,16 @@ export default {
         console.log(err);
       }
     },
-    connectToClassroom () {
-      const url = 'userProfiles/' + this.email;
-      async function quickstart() {
-        console.log("This is URL = " + url);
-        const res = await gaxios.request({url});
-        console.log(`status: ${res.status}`);
-        console.log('data:');
-        console.log(res.data);
-      }
-      quickstart().catch(error => console.log("error occured in Lab2 ClassroomConnect(), " + error));
+    // connectToClassroom () {
+    //   const url = 'userProfiles/' + this.email;
+    //   async function quickstart() {
+    //     console.log("This is URL = " + url);
+    //     const res = await gaxios.request({url});
+    //     console.log(`status: ${res.status}`);
+    //     console.log('data:');
+    //     console.log(res.data);
+    //   }
+    //   quickstart().catch(error => console.log("error occured in Lab2 ClassroomConnect(), " + error));
       
       /* eslint-disable */
       
@@ -147,7 +147,7 @@ export default {
       client.on( 'ready', async classr => {
         client.getCourses().then(res => {console.log(res)});
       }) */
-    },
+    // },
   }
 }
 </script>
