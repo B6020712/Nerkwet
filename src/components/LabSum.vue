@@ -6,7 +6,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn v-on:click="goto(item.action)" class="ma-2" outlined color="indigo">LAB</v-btn>
-              <v-btn v-on:click="goto(item.action2)" class="ma-2" outlined color="red">Assignment</v-btn>
+              <!-- <v-btn v-on:click="goto(item.action2)" class="ma-2" outlined color="red">Assignment</v-btn> -->
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>

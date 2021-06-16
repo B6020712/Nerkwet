@@ -75,8 +75,8 @@
                 <v-spacer></v-spacer>
                 <v-btn @click="labresult" color="red">Result</v-btn>
                 <v-spacer></v-spacer>
-                <v-btn @click="gotoHomework" color="primary">Homework</v-btn>
-                <v-spacer></v-spacer>
+                <!-- <v-btn @click="gotoHomework" color="primary">Homework</v-btn>
+                <v-spacer></v-spacer> -->
               </div>
 
               <div v-if="result" class="text--primary" style="text-align: left">
@@ -145,7 +145,7 @@ export default {
   data() {
     return {
       result: false,
-      access_Token: '',
+      // access_Token: '',
       downLoadURL: '',
       readyToDoQuest: false,
       name: 'LAB2',
@@ -183,23 +183,23 @@ export default {
   created() {
     console.log("access token from login comp = ")
     firebase.auth().onAuthStateChanged(user => {
-      var starsRef = storage.ref().child('labAssignment/Lab31_Std.pkt');
-      starsRef.getDownloadURL()
-      .then((url) => {
-        this.downLoadURL = url;
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case 'storage/object-not-found':
-            break;
-          case 'storage/unauthorized':
-            break;
-          case 'storage/canceled':
-            break;
-          case 'storage/unknown':
-            break;
-        }
-      });
+      // var starsRef = storage.ref().child('labAssignment/Lab31_Std.pkt');
+      // starsRef.getDownloadURL()
+      // .then((url) => {
+      //   this.downLoadURL = url;
+      // })
+      // .catch((error) => {
+      //   switch (error.code) {
+      //     case 'storage/object-not-found':
+      //       break;
+      //     case 'storage/unauthorized':
+      //       break;
+      //     case 'storage/canceled':
+      //       break;
+      //     case 'storage/unknown':
+      //       break;
+      //   }
+      // });
       
       this.logInSign = !!user;
       if(user) {
@@ -261,34 +261,34 @@ export default {
     labresult() {
       return this.result = true;
     },
-    gotoHomework() {
-      this.$router.push('/lab2_hw');
-    },
+    // gotoHomework() {
+    //   this.$router.push('/lab2_hw');
+    // },
     // requestQuest() { this.readyToDoQuest = true; },
-    ClassroomConnect() {
-      var courseId = 343458567331;
-      var courseWorkId = 343458567494;
-      var id = 'Cg4ItcCBm7ABEMaq573_CQ'; // bosslove242@gmail.com
-      const url = 'courses/' + courseId + '/courseWork/' + courseWorkId + '/studentSubmissions/' + id + ':turnIn';
-      // const url = 'courses/' + courseId + '/courseWork';
-      async function quickstart() {
-        console.log("This is URL = " + url);
-        // const res = await gaxios.request({url});
+    // ClassroomConnect() {
+    //   var courseId = 343458567331;
+    //   var courseWorkId = 343458567494;
+    //   var id = 'Cg4ItcCBm7ABEMaq573_CQ'; // bosslove242@gmail.com
+    //   const url = 'courses/' + courseId + '/courseWork/' + courseWorkId + '/studentSubmissions/' + id + ':turnIn';
+    //   // const url = 'courses/' + courseId + '/courseWork';
+    //   async function quickstart() {
+    //     console.log("This is URL = " + url);
+    //     // const res = await gaxios.request({url});
 
-        /* เจอเออเร่อแล้ว ต้องอ่านที่ npm ของ gaxios ตรง content-head */
-        const res = await gaxios.request({
-          url: url,
-          method: "POST",
-          // headers: { 
-          //   'Access-Control-Allow-Origin': '*',
-          //  }
-        })
-        console.log(`status: ${res.status}`);
-        console.log('data:');
-        console.log(res.data);
-      }
-      quickstart().catch(error => console.log("error occured in Lab2 ClassroomConnect(), " + error));
-    }
+    //     /* เจอเออเร่อแล้ว ต้องอ่านที่ npm ของ gaxios ตรง content-head */
+    //     const res = await gaxios.request({
+    //       url: url,
+    //       method: "POST",
+    //       // headers: { 
+    //       //   'Access-Control-Allow-Origin': '*',
+    //       //  }
+    //     })
+    //     console.log(`status: ${res.status}`);
+    //     console.log('data:');
+    //     console.log(res.data);
+    //   }
+    //   quickstart().catch(error => console.log("error occured in Lab2 ClassroomConnect(), " + error));
+    // }
   }
 };
 </script>

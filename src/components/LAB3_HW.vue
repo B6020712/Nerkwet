@@ -4,7 +4,8 @@
     <v-row>
       <v-card-text>
         <h1 style="text-align: center">Assignment : LAB 3</h1><br/>
-        <h3 class="text--primary" style="text-align: center"><strong>ไฟล์การบ้าน:</strong> <a :href='downLoadURL'>คลิกเพื่อดาว์นโหลดไฟล์การบ้าน</a></h3><br/>
+        <h3 class="text--primary" style="text-align: center"><strong>ไฟล์การบ้าน (1):</strong> <a :href='downLoadURL1'>คลิกเพื่อดาว์นโหลดไฟล์การบ้าน</a></h3><br/>
+        <h3 class="text--primary" style="text-align: center"><strong>ไฟล์การบ้าน (2):</strong> <a :href='downLoadURL2'>คลิกเพื่อดาว์นโหลดไฟล์การบ้าน</a></h3><br/>
         <v-divider></v-divider>
       </v-card-text>
 
@@ -65,7 +66,8 @@ export default {
   components: { LoginComponent },
   data() {
     return {
-      downLoadURL: '',
+      downLoadURL1: '',
+      downLoadURL2: '',
       readyToDoQuest: false,
       name: 'LAB2',
       quest1: { title: 'lab2_no1', headermsg: '1. Right Group เป็น Classful แบบใด' },
@@ -102,10 +104,28 @@ export default {
   created() {
     console.log("access token from login comp = ")
     firebase.auth().onAuthStateChanged(user => {
-      var starsRef = storage.ref().child('labAssignment/Lab31_Std.pkt');
-      starsRef.getDownloadURL()
+      var starsRef1 = storage.ref().child('labAssignment/Lab31_Std.pkt');
+      var starsRef2 = storage.ref().child('labAssignment/Lab32_Std.pkt');
+      starsRef1.getDownloadURL()
       .then((url) => {
-        this.downLoadURL = url;
+        this.downLoadURL1 = url;
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case 'storage/object-not-found':
+            break;
+          case 'storage/unauthorized':
+            break;
+          case 'storage/canceled':
+            break;
+          case 'storage/unknown':
+            break;
+        }
+      });
+
+      starsRef2.getDownloadURL()
+      .then((url) => {
+        this.downLoadURL2 = url;
       })
       .catch((error) => {
         switch (error.code) {
