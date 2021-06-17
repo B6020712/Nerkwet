@@ -7,14 +7,10 @@
           <br />
           <div class="display-3 mb-3 text-center">LAB 2</div>
           <div class="title font-regular text-center">IP Addressing</div>
-
-          <v-row align="center" justify="center">
-            <v-card-text>
-              <p class="subtitle-1 text--primary">
-                <v-img max-width="1100" min-height="100" src="@/assets/lab/lab2/lab2-1.png"></v-img><br/>
-              </p>
-            </v-card-text>
-          </v-row>
+          <div align="center" justify="center">
+            <v-img height="600px" src="@/assets/lab/lab2/lab2-1.png"></v-img><br/>
+          </div>
+          <div class="title font-regular text-center">ไฟล์แลป: <a :href='downLoadURL'>คลิกเพื่อดาว์นโหลดไฟล์แลป</a></div><br/>
         </v-card>
       </v-col>
 
@@ -29,10 +25,10 @@
                 - สาขาที่ 1 มีจำนวน Host ทั้งหมด 4000 เครื่อง<br/>
                 - สาขาที่ 2 มีจำนวน Host ทั้งหมด 2000 เครื่อง<br/>
                 สิ่งที่ต้องทำคือจัดสรร IP Address ให้กับสาขาที่ 1 และ สาขาที่ 2 โดย<br/>
-                จัดสรร IP Address ให้กับ Interface ของ Router แต่ละสาขาเป็น IP Address แรกที่ใช้ได้<br/>
-                จากนั้นจัดสรร IP Address ให้กับ Host ของทั้งสองสาขาโดยให้ Host เครื่องใดก็ได้มี IP Address ที่เป็นเลขสุดท้ายที่ใช้ได้<br/>
-                IP Address ของบริษัท A เริ่มตั้งแต่ 172.16.0.1 เป็นต้นไป<br/>
-                จากนั้นทำให้ Host ของทั้งสองสาขาสามารถ Ping หากันได้
+                > จัดสรร IP Address ให้กับ Interface ของ Router แต่ละสาขาเป็น IP Address แรกที่ใช้ได้<br/>
+                > จากนั้นจัดสรร IP Address ให้กับ Host ของทั้งสองสาขาโดยให้ Host เครื่องใดก็ได้มี IP Address ที่เป็นเลขสุดท้ายที่ใช้ได้<br/>
+                > IP Address ของบริษัท A เริ่มตั้งแต่ 172.16.0.1 เป็นต้นไป<br/>
+                > จากนั้นทำให้ Host ของทั้งสองสาขาสามารถ Ping หากันได้
               </p>
               <!-- <p class="subtitle-1">
                 คำสั่งที่ใช้คือ<br/>
@@ -63,14 +59,32 @@
                 <v-spacer></v-spacer>
                 <v-btn @click="labresult" color="red">Result</v-btn>
                 <v-spacer></v-spacer>
+                <v-btn @click="labcommand" color="primary">Command</v-btn>
+                <v-spacer></v-spacer>
                 <!-- <v-btn @click="gotoHomework" color="primary">Homework</v-btn>
                 <v-spacer></v-spacer> -->
               </div>
 
-              <div v-if="result" class="text--primary" style="text-align: left">
+              <div v-if="result">
                 <v-divider></v-divider><br />
-                <h1 class="headline text--primary mainP">ผลลัพธ์ของการทำแลปหากทำสำเร็จ</h1><br/>
-                <div class="subtitle-1 text--primary mainP">result : </div>
+                <h1 class="headline text--primary mainP">ผลลัพธ์ของการทำแลป</h1><br/>
+                <div align="center" justify="center">
+                  <v-img height="600" src="@/assets/lab/lab2/lab2result1.png"></v-img><br/>
+                  <p class="subtitle-1 mainP" style="margin-top: 5px">
+                    ทำการ ping และ tracert จาก PC3 ไปยัง PC 0  
+                  </p>
+                  <v-img width="600" src="@/assets/lab/lab2/lab2result2.png"></v-img><br/>
+                </div>
+              </div>
+
+              <div v-if="command">
+                <v-divider></v-divider><br />
+                <h1 class="headline text--primary mainP">คำสั่งที่ใช้</h1>
+                <p class="subtitle-1 mainP" style="margin-top: 5px">
+                  > Router(config)# interface g0/0/0 หรือ Router(config)# interface g0/0/1<br/>
+                  > Router(config-if)# ip address 172.16.x.x 255.255.x.x<br/>
+                  > Router(config-if)# no shutdown<br/>
+                </p>
               </div>
               
 
@@ -132,6 +146,7 @@ export default {
   components: { LoginComponent },
   data() {
     return {
+      command: false,
       result: false,
       // access_Token: '',
       downLoadURL: '',
@@ -171,23 +186,23 @@ export default {
   created() {
     console.log("access token from login comp = ")
     firebase.auth().onAuthStateChanged(user => {
-      // var starsRef = storage.ref().child('labAssignment/Lab31_Std.pkt');
-      // starsRef.getDownloadURL()
-      // .then((url) => {
-      //   this.downLoadURL = url;
-      // })
-      // .catch((error) => {
-      //   switch (error.code) {
-      //     case 'storage/object-not-found':
-      //       break;
-      //     case 'storage/unauthorized':
-      //       break;
-      //     case 'storage/canceled':
-      //       break;
-      //     case 'storage/unknown':
-      //       break;
-      //   }
-      // });
+      var lab2_Student = storage.ref().child('lab/lab2_Student.pkt');
+      lab2_Student.getDownloadURL()
+      .then((url) => {
+        this.downLoadURL = url;
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case 'storage/object-not-found':
+            break;
+          case 'storage/unauthorized':
+            break;
+          case 'storage/canceled':
+            break;
+          case 'storage/unknown':
+            break;
+        }
+      });
       
       this.logInSign = !!user;
       if(user) {
@@ -246,8 +261,17 @@ export default {
         storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
-    labresult() {
-      return this.result = true;
+    labresult() { 
+      this.result = true; 
+      if (this.command == true) {
+        this.command = false;
+      }
+    },
+    labcommand() { 
+      this.command = true;
+      if (this.result == true) {
+        this.result = false;
+      }
     },
     // gotoHomework() {
     //   this.$router.push('/lab2_hw');
