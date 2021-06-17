@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col width="30%">
+      <v-col>
         <br />
         <v-card class="mx-auto" max-width="900px" min-height="100px">
           <br />
@@ -14,7 +14,7 @@
         </v-card>
       </v-col>
 
-      <v-col width="70%">
+      <v-col>
         <br />
         <v-card class="mx-auto" max-width="900px" min-height="100px">
           <v-row align="center" justify="center">

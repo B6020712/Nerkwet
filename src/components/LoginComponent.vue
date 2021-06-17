@@ -13,13 +13,12 @@
                 </v-avatar>
               </v-btn>
             </template>
-            <v-card height="250px" width="250px">
+            <v-card height="200" width="250">
               <v-list-item-content class="justify-center">
                 <div class="mx-auto text-center">
                   <v-avatar><img :src="photo" class="photoo"></v-avatar>
                   <h3>{{name}}</h3>
                   <p class="caption mt-1">{{email}}</p>
-                  <v-divider></v-divider><br/>
                   <v-btn @click="signOut">Sign Out</v-btn>
                   <!-- <v-btn @click="connectToClassroom">Show Classroom</v-btn> -->
                 </div>
