@@ -57,11 +57,11 @@
                 <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
                 <v-row>
                   <v-spacer></v-spacer>
-                  <v-btn color="indigo" @click="toLab3"><v-icon>mdi-arrow-left-bold-box-outline</v-icon>LAB 3</v-btn>
+                  <v-btn color="indigo" @click="toLab5"><v-icon>mdi-arrow-left-bold-box-outline</v-icon>LAB 5</v-btn>
                   <v-spacer></v-spacer>
                   <v-btn color="primary" @click="uploadFile">Upload<v-icon>mdi-file-upload-outline</v-icon></v-btn>
                   <v-spacer></v-spacer>
-                  <v-btn color="green" @click="toLab4">LAB 4<v-icon>mdi-arrow-right-bold-box-outline</v-icon></v-btn>
+                  <v-btn color="green" @click="toLab6">LAB 6<v-icon>mdi-arrow-right-bold-box-outline</v-icon></v-btn>
                   <v-spacer></v-spacer>
                 </v-row>
               </div>
@@ -120,7 +120,6 @@ export default {
     }
   },
   created() {
-    console.log("access token from login comp = ")
     firebase.auth().onAuthStateChanged(user => {
       var starsRef = storage.ref().child('labAssignment/Lab5_Std.pkt');
       starsRef.getDownloadURL()
@@ -148,11 +147,11 @@ export default {
     })
   },
   methods: {
-    toLab3() { 
-      this.$router.push("/lab3"); 
+    toLab5() { 
+      this.$router.push("/lab5"); 
     },
-    toLab4() { 
-      this.$router.push("/lab4"); 
+    toLab6() { 
+      this.$router.push("/lab6"); 
     },
     checkResult (LAB2_NO1, LAB2_NO2) {
       if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 

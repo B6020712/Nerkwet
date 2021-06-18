@@ -200,7 +200,6 @@ export default {
     }
   },
   created() {
-    console.log("access token from login comp = ")
     firebase.auth().onAuthStateChanged(user => {
       var starsRef1 = storage.ref().child('labAssignment/Lab31_Std.pkt');
       var starsRef2 = storage.ref().child('labAssignment/Lab32_Std.pkt');
@@ -246,8 +245,8 @@ export default {
     })
   },
   methods: {
-    toLab2() { this.$router.push("/lab3"); },
-    toLab3() { this.$router.push("/lab4"); },
+    toLab3() { this.$router.push("/lab3"); },
+    toLab4() { this.$router.push("/lab4"); },
     checkResult (LAB2_NO1, LAB2_NO2) {
       if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 
         this.passSign = true;
