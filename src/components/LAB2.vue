@@ -2,7 +2,6 @@
   <div>
     <v-row>
       <v-col>
-        <br />
         <v-card class="mx-auto" max-width="900px" min-height="100px">
           <br />
           <div class="display-3 mb-3 text-center">LAB 2</div>
@@ -15,8 +14,8 @@
       </v-col>
 
       <v-col>
-        <br />
         <v-card class="mx-auto" max-width="900px" min-height="100px">
+          <br/>
           <v-row align="center" justify="center">
             <v-card-text>
               <p class="headline text--primary text-center">อธิบายแลป</p>

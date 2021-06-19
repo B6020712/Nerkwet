@@ -28,14 +28,53 @@
                   </div>
                   <div class="headline text--primary labexplan">อธิบาย assignment</div>
                   <div class="text--primary labexplan" style="margin-top: 2px">
-                    ทำการเชื่อมต่อสาย UTP ระหว่าง Multilayer Switch เข้ากับ Laptop หรือ PC ของนักศึกษาดังรูปที่ 1 Network Topology<br/>
-                    ทำการตั้งค่า IP Address โดยกำหนดการจัดสรร IP แบบ Classful โดย IP ที่ใช้ในการจัดสรรค์มีดังนี้<br/>
+                    1.ทำการเชื่อมต่อสาย UTP ระหว่าง Multilayer Switch เข้ากับ Laptop หรือ PC ดังภาพด้านบน<br/>
+                    2.ทำการตั้งค่า IP Address โดยกำหนดการจัดสรร IP แบบ Classful โดย IP ที่ใช้ในการจัดสรรค์มีดังนี้<br/>
                   </div>
-                  <div class="text--primary labexplan2" style="margin-top: 5px">
-                    - <strong>VLAN10 : </strong>10.1.1.0/24<br/>
-                    - <strong>VLAN20 : </strong>10.1.2.0/24<br/>
-                    - <strong>VLAN30 : </strong>10.1.3.0/24<br/>
-                  </div>
+                  <table class="labexplan2" style="width:70%; margin-top:10px;">
+                    <tr>
+                      <td></td>
+                      <td><div class="tabletext">VLAN10</div></td>
+                      <td><div class="tabletext">VLAN20</div></td>
+                      <td><div class="tabletext">VLAN30</div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="tabletext">A1-A2</div></td>
+                      <td><div class="tabletext">10.1.1.0/24</div></td>
+                      <td><div class="tabletext">10.1.2.0/24</div></td>
+                      <td><div class="tabletext">10.1.3.0/24</div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="tabletext">B1-B2</div></td>
+                      <td><div class="tabletext">10.2.1.0/24</div></td>
+                      <td><div class="tabletext">10.2.2.0/24</div></td>
+                      <td><div class="tabletext">10.2.3.0/24</div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="tabletext">C1-C2</div></td>
+                      <td><div class="tabletext">10.3.1.0/24</div></td>
+                      <td><div class="tabletext">10.3.2.0/24</div></td>
+                      <td><div class="tabletext">10.3.3.0/24</div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="tabletext">D1-D2</div></td>
+                      <td><div class="tabletext">10.4.1.0/24</div></td>
+                      <td><div class="tabletext">10.4.2.0/24</div></td>
+                      <td><div class="tabletext">10.4.3.0/24</div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="tabletext">E1-E2</div></td>
+                      <td><div class="tabletext">10.5.1.0/24</div></td>
+                      <td><div class="tabletext">10.5.2.0/24</div></td>
+                      <td><div class="tabletext">10.5.3.0/24</div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="tabletext">F1-F2</div></td>
+                      <td><div class="tabletext">10.6.1.0/24</div></td>
+                      <td><div class="tabletext">10.6.2.0/24</div></td>
+                      <td><div class="tabletext">10.6.3.0/24</div></td>
+                    </tr>
+                  </table>
                   <div class="headline text--primary labexplan" style="margin-top: 15px">สิ่งที่ต้องการ</div>
                   <div class="text--primary labexplan" style="margin-top: 2px">
                     1. PC สามารถ Ping ไปยังทุก PC ได้ทั้ง Vlan เดียวกันและข้าม Vlan<br/>
@@ -81,7 +120,7 @@
                     b.	กำหนดค่า VLAN ให้กับแต่ละ port ตามที่เราต้องการ
                   </div>
                   <div class="text--primary labexplan" style="margin-top: 5px;">
-                    สร้างการเชื่อมต่อเครือข่ายดังรูปด้านบน เฉพาะ Switch1 (ที่สาขา TCE) ด้านซ้ายของรูป
+                    สร้างการเชื่อมต่อเครือข่ายดังรูปด้านบน เฉพาะ Switch1 (ที่สาขา TCE) ด้านขวาของรูป
                   </div>
                   <div class="text--primary labexplan2">
                     a.	สร้าง VLANs และกำหนดชื่อให้ Switch0<br/>
