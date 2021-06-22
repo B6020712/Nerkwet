@@ -211,9 +211,10 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
-      // const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
+      const saveName = email + "_LAB6Assignment1";
       var metadata = { contentType: this.myFiles.type };
-      const uploadTask = storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).put(this.myFiles, metadata);
+      // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(this.email + "/LAB6/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -227,7 +228,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(this.email + "/LAB6/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

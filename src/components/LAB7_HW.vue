@@ -105,7 +105,7 @@
               <div v-if="passSign">
                 <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
                 <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
-                <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
+                <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{uploadValue}}%</v-progress-circular>
                 <v-row>
                   <v-spacer></v-spacer>
                   <v-btn color="indigo" @click="toLab7"><v-icon>mdi-arrow-left-bold-box-outline</v-icon>LAB 7</v-btn>
@@ -225,9 +225,10 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
-      // const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
+      const saveName = email + "_LAB7Assignment1";
       var metadata = { contentType: this.myFiles.type };
-      const uploadTask = storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).put(this.myFiles, metadata);
+      // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(this.email + "/LAB7/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -241,7 +242,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(this.email + "/LAB7/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

@@ -33,6 +33,18 @@
                   </div>
                   <table class="labexplan2" style="width:70%; margin-top:10px;">
                     <tr>
+                      <td><div class="tabletext">VLAN10</div></td>
+                      <td><div class="tabletext">VLAN20</div></td>
+                      <td><div class="tabletext">VLAN30</div></td>
+                    </tr>
+                    <tr>
+                      <td><div class="tabletext">10.1.1.0/24</div></td>
+                      <td><div class="tabletext">10.1.2.0/24</div></td>
+                      <td><div class="tabletext">10.1.3.0/24</div></td>
+                    </tr>
+                  </table>
+                  <!-- <table class="labexplan2" style="width:70%; margin-top:10px;">
+                    <tr>
                       <td></td>
                       <td><div class="tabletext">VLAN10</div></td>
                       <td><div class="tabletext">VLAN20</div></td>
@@ -74,7 +86,7 @@
                       <td><div class="tabletext">10.6.2.0/24</div></td>
                       <td><div class="tabletext">10.6.3.0/24</div></td>
                     </tr>
-                  </table>
+                  </table> -->
                   <div class="headline text--primary labexplan" style="margin-top: 15px">สิ่งที่ต้องการ</div>
                   <div class="text--primary labexplan" style="margin-top: 2px">
                     1. PC สามารถ Ping ไปยังทุก PC ได้ทั้ง Vlan เดียวกันและข้าม Vlan<br/>
@@ -304,9 +316,11 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
-      // const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
+      const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
+      const saveName = email + "_LAB3Assignment1";
       var metadata = { contentType: this.myFiles.type };
-      const uploadTask = storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).put(this.myFiles, metadata);
+      // const uploadTask = storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(this.email + "/LAB3/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -320,7 +334,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(this.email + "/LAB3/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

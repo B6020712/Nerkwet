@@ -17,44 +17,15 @@
           <br/>
           <div class="headline text--primary labexplan">อธิบายวิธีการทำ</div>
           <div class="text--primary labexplan">
-            1.นำ PC และ Router (Router รุ่น 2960) มาวางและเชื่อมต่อกันดังภาพ<br/>
-            2.กำหนด IP Address ให้กับ PC ทั้ง 4 เครื่องดังนี้
+            1.นำ PC และ Switch (Multilayer Switch 3650) มาวางและเชื่อมต่อกันดังภาพ<br/>
+            2.กำหนด IP Address ให้กับ PC ทั้ง 4 โดย
           </div>
           <div class="text--primary labexplan2">
-            A1 : 191.10.1.2<br/>
-            A2 : 191.10.1.3<br/>
-            B1 : 191.20.1.2<br/>
-            B2 : 191.20.1.3<br/>
+            2.1 VLAN 10 เริ่มต้นที่ 10.1.1.0/24<br/>
+            2.2 VLAN 20 เริ่มต้นที่ 10.1.2.0/24
           </div>
-          <div class="text--primary labexplan">
-            3.กำหนด Vlan ดังตารางด้านล่าง
-          </div>
-          <table class="labexplan2" style="width:70%; margin-top:10px;">
-            <tr>
-              <td><div class="tabletext"></div></td>
-              <td><div class="tabletext">Vlan 10</div></td>
-              <td><div class="tabletext">Vlan 20</div></td>
-              <td><div class="tabletext">Trunk</div></td>
-              <td><div class="tabletext">Native</div></td>
-            </tr>
-            <tr>
-              <td><div class="tabletext">Switch0</div></td>
-              <td><div class="tabletext">Fa0/1</div></td>
-              <td><div class="tabletext">Fa0/2</div></td>
-              <td><div class="tabletext">Gig0/1</div></td>
-              <td><div class="tabletext">99</div></td>
-            </tr>
-            <tr>
-              <td><div class="tabletext">Switch1</div></td>
-              <td><div class="tabletext">Fa0/1</div></td>
-              <td><div class="tabletext">Fa0/2</div></td>
-              <td><div class="tabletext">Gig0/1</div></td>
-              <td><div class="tabletext">99</div></td>
-            </tr>
-          </table>
           <div class="headline text--primary labexplan" style="margin-top: 15px">หากทำสำเร็จ</div>
           <div class="text--primary labexplan">
-            PC ที่อยู่ใน Vlan เดียวกันสามารถ ping หากันได้
           </div>
           
           <br/>
@@ -72,11 +43,11 @@
           <div v-if="result" class="text--primary">
             <v-divider></v-divider><br/>
             <div class="headline text--primary labexplan">ผลลัพธ์ของการทำแลป</div>
-            <div class="labexplan2">> ping จาก A1 ไปยัง A2 (Vlan10)</div><br/>
+            <div class="labexplan2">> ping จาก PC0 ไปยัง PC2 (Vlan 10)</div><br/>
             <div align="center" justify="center">
               <v-img width="550" src="@/assets/lab/lab3/lab3Result1.png"></v-img><br/>
             </div>
-            <div class="labexplan2">> ping จาก B2 ไปยัง B1 (Vlan20)</div><br/>
+            <div class="labexplan2">> ping จาก PC1 ไปยัง PC3 (Vlan 20)</div><br/>
             <div align="center" justify="center">
               <v-img width="550" src="@/assets/lab/lab3/lab3Result2.png"></v-img><br/>
             </div>
@@ -101,7 +72,7 @@
               Switch(config-if)# switchport mode access<br/>
               Switch(config-if)# switchport access vlan 10
             </div>
-            <div class="labexplan">
+            <!-- <div class="labexplan">
               3.คำสั่งในการกำหนด Trunk 
             </div>
             <div class="labexplan2 font-italic">
@@ -114,9 +85,9 @@
             </div>
             <div class="labexplan2 font-italic">
               Switch(config-if)# switchport trunk native vlan 99
-            </div>
+            </div> -->
             <div class="labexplan">
-              5.คำสั่งในการตรวจสอบ Vlan ที่ได้ตั้งค่าไป 
+              3.คำสั่งในการตรวจสอบ Vlan ที่ได้ตั้งค่าไป 
             </div>
             <div class="labexplan2 font-italic">
               Switch# show vlan brief<br/>
