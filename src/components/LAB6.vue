@@ -1,76 +1,107 @@
 <template>
   <div>
     <v-row>
-      <v-col width="30%">
-        <br />
-        <v-card class="mx-auto" max-width="900px" min-height="100px">
+      <v-col>
+        <v-card class="mx-auto">
           <br />
           <div class="display-3 mb-3 text-center">LAB 6</div>
           <div class="title font-regular text-center">Static Routing (2)</div>
-
-          <v-row align="center" justify="center">
-            <v-card-text>
-              <p class="subtitle-1 text--primary">
-                <v-img max-width="1100" min-height="100" src="@/assets/lab/lab6/lab6-1.png"></v-img><br/>
-              </p>
-            </v-card-text>
-          </v-row>
+          <div align="center" justify="center">
+            <!-- <v-img src="@/assets/lab/lab4/lab4Learning1.png"></v-img><br/> -->
+          </div>
         </v-card>
       </v-col>
 
-      <v-col width="70%">
-        <br />
-        <v-card class="mx-auto" max-width="900px" min-height="100px">
-          <v-row align="center" justify="center">
-            <v-card-title>
-              <p class="headline text--primary text-center">อธิบายแลป</p>
-            </v-card-title>
-            <v-card-subtitle>
-              <p class="subtitle-1 text--primary text-center">
-                - - - - - - - - - - - - - - - - - - - Right Group - - - - - - - - - - - - - - - - - - -<br/>
-              </p>
-              <p class="subtitle-1 text--primary">
-              Right Group ได้รับ Block of address จาก ISP เริ่มที่ 192.168.1.0/26 โดย Right Group มี่ HOST ทั้งหมด 61 เครื่อง <br/>
-              สิ่งที่ต้องทำคือ<br/>
-              1. Interface ของ Router แต่ละสาขาเป็น IP Address แรกที่ใช้ได้<br/>
-              2. จัดสรร IP Address โดยให้ PC1 เป็น Address แรกที่ใช้ได้ และ PC2 เป็น IP Address สุดท้ายที่ใช้ได้
-              </p>
-              <p class="subtitle-1">
-                คำสั่งที่ใช้คือ<br/>
-                Router(config)# interface g0/0 หรือ Router(config)# interface g0/1<br/>
-                Router(config-if)# ip address 192.168.x.x 255.255.x.x<br/>
-                Router(config-if)# no shutdown<br/>
-              </p>
-              <p class="subtitle-1 text--primary text-center">
-                - - - - - - - - - - - - - - - - - - - Left Group - - - - - - - - - - - - - - - - - - -<br/>
-              </p>
-              <p class="subtitle-1 text--primary">
-                Left Group ได้รับ Block of Address จาก ISP เริ่มที่ 172.16.0.0/26 โดย Left Group มี่ HOST ทั้งหมด 61 เครื่อง <br/>
-                สิ่งที่ต้องทำคือ<br/>
-                3. Interface ของ Router แต่ละสาขาเป็น IP Address แรกที่ใช้ได้<br/>
-                4. จัดสรร IP Address โดยให้ PC3 เป็น Address แรกที่ใช้ได้ และ PC4 เป็น IP Address สุดท้ายที่ใช้ได้<br/>
-                5. ทำให้ PC1 ping หา PC3 ได้ <br/>        
-                6. ทำให้ PC2 ping หา PC4 ได้ <br/>        
-              </p>
+      <v-col>
+        <v-card class="mx-auto">
+          <br/>
+          <div class="headline text--primary labexplan">อธิบายวิธีการทำ</div>
+          <div class="text--primary labexplan">
+          </div>
+          <div class="text--primary labexplan2">
+          </div>
+          <table class="labexplan2" style="width:70%; margin-top:10px;">
+            <tr>
+              <td><div class="tabletext"></div></td>
+              <td><div class="tabletext"></div></td>
+              <td><div class="tabletext"></div></td>
+              <td><div class="tabletext"></div></td>
+              <td><div class="tabletext"></div></td>
+            </tr>
+          </table>
+          <div class="headline text--primary labexplan" style="margin-top: 15px">หากทำสำเร็จ</div>
+          <div class="text--primary labexplan">
+          </div>
+          
+          <br/>
+          <div class="d-flex justify-space-around mb-6 outlined">
+            <v-spacer></v-spacer>
+            <v-btn @click="labresult" color="red">Result</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn @click="labcommand" color="primary">Command</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn @click="gotoHomework" color="green">Homework</v-btn>
+            <v-spacer></v-spacer>
+          </div>
+          <br/>
 
-              <div class="d-flex justify-space-around mb-6 outlined">
-                <v-spacer></v-spacer>
-                <v-btn @click="labresult" color="red">Result</v-btn>
-                <v-spacer></v-spacer>
-                <v-btn @click="gotoHomework" color="primary">Homework</v-btn>
-                <v-spacer></v-spacer>
-              </div>
-
-              <div v-if="result" class="text--primary" style="text-align: left">
-                <v-divider></v-divider><br />
-                <h1>ผลลัพธ์ของการทำแลป</h1><br />
-                <div>result : </div>
-              </div>
-            </v-card-subtitle>
-          </v-row>
+          <div v-if="result" class="text--primary">
+            <v-divider></v-divider><br/>
+            <div class="headline text--primary labexplan">ผลลัพธ์ของการทำแลป</div>
+            <div class="labexplan2">> ping จาก A1 ไปยัง A2 (Vlan10)</div><br/>
+            <div align="center" justify="center">
+              <v-img width="550" src="@/assets/lab/lab4/lab4Result1.png"></v-img><br/>
+            </div>
+            <div class="labexplan2">> ping จาก B2 ไปยัง B1 (Vlan20)</div><br/>
+            <div align="center" justify="center">
+              <v-img width="550" src="@/assets/lab/lab4/lab4Result2.png"></v-img><br/>
+            </div>
+            <br/>
+          </div>
+            
+          <div v-if="command" class="text--primary">
+            <v-divider></v-divider><br/>
+            <div class="headline text--primary labexplan">คำสั่งที่ใช้ในการทำ</div>
+            <div class="labexplan">
+              1.คำสั่งในการตั้งชื่อ Vlan 
+            </div>
+            <div class="labexplan2 font-italic">
+              Switch(config)# vlan 10<br/>
+              Switch(config-vlan)# name {{msg1}}
+            </div>
+            <div class="labexplan">
+              2.คำสั่งในการกำหนด Vlan 
+            </div>
+            <div class="labexplan2 font-italic">
+              Switch(config)# interface fa0/1<br/>
+              Switch(config-if)# switchport mode access<br/>
+              Switch(config-if)# switchport access vlan 10
+            </div>
+            <div class="labexplan">
+              3.คำสั่งในการกำหนด Trunk 
+            </div>
+            <div class="labexplan2 font-italic">
+              Switch(config)# interface Gig0/1<br/>
+              Switch(config-if)# switchport trunk allowed vlan 10,20<br/>
+              Switch(config-if)# switchport mode trunk
+            </div>
+            <div class="labexplan">
+              4.คำสั่งในการกำหนด Native Vlan 
+            </div>
+            <div class="labexplan2 font-italic">
+              Switch(config-if)# switchport trunk native vlan 99
+            </div>
+            <div class="labexplan">
+              5.คำสั่งในการตรวจสอบ Vlan ที่ได้ตั้งค่าไป 
+            </div>
+            <div class="labexplan2 font-italic">
+              Switch# show vlan brief<br/>
+              Switch# show interface trunk
+            </div>
+            <br/>
+          </div>
         </v-card>
       </v-col>
-      <!-- End Here -->
     </v-row>
   </div>
 </template>
@@ -82,6 +113,7 @@ import 'firebase/auth';
 export default {
   data() {
     return {
+      command: false,
       result : false,
       user : {email : ''},
     }
@@ -95,8 +127,44 @@ export default {
     })
   },
   methods: {
-    labresult() { return this.result = true; },
     gotoHomework() { this.$router.push('/lab6_hw'); },
+    labresult() { 
+      this.result = true; 
+      if (this.command == true) {
+        this.command = false;
+      }
+    },
+    labcommand() { 
+      this.command = true;
+      if (this.result == true) {
+        this.result = false;
+      }
+    },
   }
 };
 </script>
+
+<style scoped>
+  .labexplan {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 2px;
+  }
+  .labexplan2 {
+    margin-left: 50px;
+    margin-right: 40px;
+    margin-top: 2px;
+  }
+  .labexplan3 {
+    margin-left: 60px;
+    margin-right: 40px;
+    margin-top: 2px;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  .tabletext {
+    margin-left: 5px;
+  }
+</style>

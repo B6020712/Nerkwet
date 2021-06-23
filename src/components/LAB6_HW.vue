@@ -77,14 +77,14 @@
             </div>
 
             <div v-if="readyToDoQuest">
-              <h1 class="text--primary" style="text-align: center">คำถามก่อนส่ง Assignment</h1>
-              <v-radio-group v-model="quest1.title" style="margin-left: 10px">
+              <h1 class="text--primary" style="text-align: center">คำถามก่อนส่ง Assignment</h1><br/>
+              <v-radio-group v-model="quest1.title" class="labexplan" style="margin-top: 5px">
                 <div>{{quest1.headermsg}}</div>
-                <v-radio v-for="citem in choice1" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
+                <v-radio class="labexplan2" style="margin-top: 2px" v-for="citem in choice1" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
               </v-radio-group>
-              <v-radio-group v-model="quest2.title" style="margin-left: 10px">
+              <v-radio-group v-model="quest2.title" class="labexplan" style="margin-top: 5px">
                 <div>{{quest2.headermsg}}</div>
-                <v-radio v-for="citem in choice2" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
+                <v-radio class="labexplan2" style="margin-top: 2px" v-for="citem in choice2" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
               </v-radio-group>
 
               <div v-if="checked" class="d-flex justify-space-around mb-6 outlined">
@@ -128,19 +128,19 @@ export default {
       downLoadURL: '',
       readyToDoQuest: false,
       name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. Right Group เป็น Classful แบบใด' },
-      quest2: { title: 'lab2_no2', headermsg: '2. Left Group เป็น Classful แบบใด' },
+      quest1: { title: 'lab2_no1', headermsg: '1. หาก tracert จาก PC0 ไปยัง PC1 จะผ่านเส้นทางเหมือนกับข้อใด' },
+      quest2: { title: 'lab2_no2', headermsg: '2. จาก PC0 ไปยัง PC2 ข้อใดต่อไปนี้มีค่า Cost มากที่สุด' },
       choice1: [
-        { no: 1, msg: 'A' },
-        { no: 2, msg: 'B' },
-        { no: 3, msg: 'C' },
-        { no: 4, msg: 'D' },
+        { no: 1, msg: '192.168.10.254 => 1.1.5.2 => 192.168.11.2' },
+        { no: 2, msg: '192.168.10.254 => 1.1.4.2 => 1.1.3.1 => 192.168.11.2' },
+        { no: 3, msg: '192.168.10.254 => 1.1.5.2 => 1.1.3.2 => 1.1.2.1 => 1.1.1.1 => 192.168.11.2 ' },
+        { no: 4, msg: '192.168.10.254 => 1.1.4.2 => 1.1.2.1 => 1.1.1.1 => 192.168.11.2' },
       ],
       choice2: [
-        { no: 1, msg: 'E' },
-        { no: 2, msg: 'Z' },
-        { no: 3, msg: 'G' },
-        { no: 4, msg: 'DA' },
+        { no: 1, msg: '192.168.10.254 => 1.1.4.2 => 1.1.2.1 => 192.168.12.200' },
+        { no: 2, msg: '192.168.10.254 => 1.1.4.2 => 1.1.3.1 => 1.1.1.2 => 192.168.12.200' },
+        { no: 3, msg: '192.168.10.254 => 1.1.5.2 => 1.1.1.2 => 192.168.12.200' },
+        { no: 4, msg: '192.168.10.254 => 1.1.5.2 => 1.92.168.11.2' },
       ],
       dialog: false,
       lab2_no1: Number,
@@ -194,7 +194,7 @@ export default {
       this.$router.push("/lab7"); 
     },
     checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 
+      if (LAB2_NO1 == 4 && LAB2_NO2 == 3) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 

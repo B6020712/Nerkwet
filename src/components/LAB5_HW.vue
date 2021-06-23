@@ -11,13 +11,12 @@
           </div>
           <div class="headline text--primary labexplan" style="margin-top:10px;">อธิบาย assignment</div>
           <div class="text--primary labexplan" style="margin-top: 2px">
-            กำหนดค่าการเชื่อมต่อดังรูปด้านบน<br/>
-            IP address ทุก subnet มี subnet mask คือ /24 แบบ Classful<br/>
+            1.กำหนดค่าการเชื่อมต่อดังรูปด้านบน<br/>
+            2.IP address ทุก subnet มี subnet mask คือ /24 แบบ Classful<br/>
           </div>
           <div class="headline text--primary labexplan" style="margin-top: 15px">สิ่งที่ต้องการ</div>
           <div class="text--primary labexplan" style="margin-top: 2px">
-            วางแผนและกำหนดเส้นทาง (Route Planning) เพื่อให้ Packet Forwarding โดยใช้เส้นทางที่มี<br/>
-            จำนวน hop น้อยที่สุด (the shortest routes)
+            1.วางแผนและกำหนดเส้นทาง (Route Planning) เพื่อให้ Packet Forwarding โดยใช้เส้นทางที่มี<span class="red--text">จำนวน hop น้อยที่สุด (the shortest routes)</span>
           </div>
           <br/>
         </v-card>
@@ -203,8 +202,10 @@ export default {
   }
   .labexplan {
     margin-left: 40px;
+    margin-right: 40px;
   }
   .labexplan2 {
     margin-left: 50px;
+    margin-right: 40px;
   }
 </style>
