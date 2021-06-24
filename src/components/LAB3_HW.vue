@@ -13,11 +13,11 @@
             <v-stepper class="mt-12" non-linear value="2">
               <v-stepper-header>
                 <v-stepper-step editable step="1">
-                  Lab31_Std.pkt
+                  Lab31_Std
                 </v-stepper-step>
                 <v-divider></v-divider>
                 <v-stepper-step editable step="2">
-                  Lab32_Std.pkt
+                  Lab32_Std
                 </v-stepper-step>
               </v-stepper-header>
               <v-stepper-items>
@@ -139,6 +139,18 @@
                     b.	กำหนดค่า VLAN ให้กับแต่ละ port ตามที่เราต้องการ<br/>
                     c.	สร้าง Trunk ระหว่าง SW0 และ SW1
                   </div>
+                  <div class="text--primary labexplan3" style="margin-top: 2px">
+                    คำสั่งที่ใช้ในการสร้าง Trunk และตรวจสอบ
+                  </div>
+                  <div class="text--primary font-italic labexplan3" style="margin-top: 2px">
+                    > Switch# configure terminal<br/>
+                    > Switch(config)# interface g0/1<br/>
+                    > Switch(config)# switchport trunk allowed vlan 10,20<br/>
+                    > Switch(config-if)# switchport mode trunk<br/>
+                    > Switch(config-if)# no shutdown<br/>
+                    > Switch# show interface trunk<br/>
+                    ทำแบบเดียวกันที่ Switch อีกเครื่อง
+                  </div>
                   <div class="headline text--primary labexplan" style="margin-top: 15px">สิ่งที่ต้องการ</div>
                   <div class="text--primary labexplan" style="margin-top: 2px">
                     1. CPE0 สามารถ Ping ไปยัง CPE-Std ที่นั่งอยู่ในสาขา TCE ได้<br/>
@@ -181,7 +193,7 @@
                 </div>
 
                 <div v-if="passSign">
-                  <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt</strong></p>
+                  <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt (ส่งทีละไฟล์)</strong></p>
                   <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
                   <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
                   <v-row>
@@ -219,19 +231,19 @@ export default {
       downLoadURL2: '',
       readyToDoQuest: false,
       name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. Right Group เป็น Classful แบบใด' },
-      quest2: { title: 'lab2_no2', headermsg: '2. Left Group เป็น Classful แบบใด' },
+      quest1: { title: 'lab2_no1', headermsg: '1.ข้อใดคือคำสั่งที่ใช้สร้างและกำหนดชื่อให้กับ vlan' },
+      quest2: { title: 'lab2_no2', headermsg: '2.คำสั่งเพื่อสร้าง Trunk มีไว้เพื่อจุดประสงค์ใด' },
       choice1: [
-        { no: 1, msg: 'A' },
-        { no: 2, msg: 'B' },
-        { no: 3, msg: 'C' },
-        { no: 4, msg: 'D' },
+        { no: 1, msg: 'Switch(config)# vlan <หมายเลข> และ Switch(config-vlan)# name <ชื่อของ vlan>' },
+        { no: 2, msg: 'Switch(config)# vlan <หมายเลข> and name <ชื่อของ vlan>' },
+        { no: 3, msg: 'Switch(config)# vlan and name <หมายเลข, ชื่อของ vlan>' },
+        { no: 4, msg: 'Switch(config)# vlan <หมายเลข> <ชื่อของ vlan>' },
       ],
       choice2: [
-        { no: 1, msg: 'E' },
-        { no: 2, msg: 'Z' },
-        { no: 3, msg: 'G' },
-        { no: 4, msg: 'DA' },
+        { no: 1, msg: 'เพื่อกำหนดเส้นทางให้ทุกการติดต่อต้องผ่าน port ที่เป็น trunk เท่านั้น' },
+        { no: 2, msg: 'เพื่อส่ง traffic ของหลายๆ VLAN ได้ภายใน port เดียวกัน' },
+        { no: 3, msg: '' },
+        { no: 4, msg: '' },
       ],
       dialog: false,
       lab2_no1: Number,
@@ -299,7 +311,7 @@ export default {
     toLab3() { this.$router.push("/lab3"); },
     toLab4() { this.$router.push("/lab4"); },
     checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 
+      if (LAB2_NO1 == 1 && LAB2_NO2 == 2) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 
@@ -348,9 +360,15 @@ export default {
   }
   .labexplan {
     margin-left: 10px;
+    margin-right: 10px;
   }
   .labexplan2 {
     margin-left: 20px;
+    margin-right: 10px;
+  }
+  .labexplan3 {
+    margin-left: 30px;
+    margin-right: 10px;
   }
   table, th, td {
     border: 1px solid black;
