@@ -242,8 +242,8 @@ export default {
       choice2: [
         { no: 1, msg: 'เพื่อกำหนดเส้นทางให้ทุกการติดต่อต้องผ่าน port ที่เป็น trunk เท่านั้น' },
         { no: 2, msg: 'เพื่อส่ง traffic ของหลายๆ VLAN ได้ภายใน port เดียวกัน' },
-        { no: 3, msg: '' },
-        { no: 4, msg: '' },
+        { no: 3, msg: 'เพื่อทำให้การเชื่อมต่อรวดเร็วขึ้น' },
+        { no: 4, msg: 'เพื่อปิด interface ที่เราไม่ได้ใช้งาน' },
       ],
       dialog: false,
       lab2_no1: Number,

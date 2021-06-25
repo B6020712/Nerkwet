@@ -11,9 +11,9 @@
           </div>
           <div class="headline text--primary labexplan" style="margin-top:10px;">อธิบาย assignment</div>
           <div class="text--primary labexplan" style="margin-top: 2px">
-            ทำการเชื่อมต่อดังรูปด้านบน<br/>
-            Switch 3650 เชื่อมต่อด้วย EtherChannel โหมด Active และ Trunk ระหว่าง Switch 2960 ทั้งสองดังภาพด้านบน<br/>
-            ให้ทำการตั้งค่า IP Address ที่เครื่อง PCs ดังนี้ ตารางแสดง IP CIDR ข้างล่าง
+            1.นำ PC, Switch(2960), Multilayer Switch(3650) มาวางและเชื่อมต่อกันดังรูปด้านบน<br/>
+            2.Switch 3650 เชื่อมต่อด้วย EtherChannel โหมด Active และ Trunk ระหว่าง Switch 2960 ทั้งสองดังภาพด้านบน<br/>
+            3.ให้ทำการตั้งค่า IP Address ที่เครื่อง PCs ดังนี้ ตารางแสดง IP CIDR ข้างล่าง
           </div>
           <table class="labexplan2" style="width:70%; margin-top:10px;">
             <tr>
@@ -115,19 +115,17 @@ export default {
       downLoadURL: '',
       readyToDoQuest: false,
       name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. Right Group เป็น Classful แบบใด' },
-      quest2: { title: 'lab2_no2', headermsg: '2. Left Group เป็น Classful แบบใด' },
+      quest1: { title: 'lab2_no1', headermsg: '1.PC0 จาก VLAN 10 สามารถ ping ไปหา PC4 จาก VLAN 20 ได้หรือไม่' },
+      quest2: { title: 'lab2_no2', headermsg: '2.จากภาพ หากสั่ง shutdown interface Fa0/2 ของ Switch0 จะเกิดอะไรขึ้น' },
       choice1: [
-        { no: 1, msg: 'A' },
-        { no: 2, msg: 'B' },
-        { no: 3, msg: 'C' },
-        { no: 4, msg: 'D' },
+        { no: 1, msg: 'ได้' },
+        { no: 2, msg: 'ไม่ได้' },
       ],
       choice2: [
-        { no: 1, msg: 'E' },
-        { no: 2, msg: 'Z' },
-        { no: 3, msg: 'G' },
-        { no: 4, msg: 'DA' },
+        { no: 1, msg: '' },
+        { no: 2, msg: '' },
+        { no: 3, msg: 'True' },
+        { no: 4, msg: '' },
       ],
       dialog: false,
       lab2_no1: Number,
@@ -182,7 +180,7 @@ export default {
       this.$router.push("/lab5"); 
     },
     checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 
+      if (LAB2_NO1 == 2 && LAB2_NO2 == 3) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 
@@ -236,9 +234,11 @@ export default {
   }
   .labexplan {
     margin-left: 40px;
+    margin-right: 40px;
   }
   .labexplan2 {
     margin-left: 50px;
+    margin-right: 40px;
   }
   table, th, td {
     border: 1px solid black;
