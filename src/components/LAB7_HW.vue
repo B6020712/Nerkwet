@@ -10,55 +10,55 @@
             <v-img src="@/assets/lab/lab7/lab7Assignment1.png"></v-img><br/>
           </div>
           <div class="headline text--primary labexplan" style="margin-top:10px;">อธิบาย assignment</div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
+          <div class="text--primary labexplan">
             กำหนดค่าการเชื่อมต่อดังรูปด้านบน<br/>
             จากภาพด้านบนเป็นการเชื่อมต่อกันของ IPv6 Network ผ่านเครื่องข่าย IPv4
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan2">
             Router10 (Dual Stack)
           </div>
-          <div class="text--primary labexplan3" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             a. G0/2 มีแค่ IPv6 address<br/>
             b. G0/0 มี IPv4 address<br/>
             c. Tunnel interface มี IPv6 address
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan2">
             Router0
           </div>
-          <div class="text--primary labexplan3" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             a. G0/0 และ G0/1 มีแค่ IPv4 address
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan2">
             Router20 (Dual Stack)
           </div>
-          <div class="text--primary labexplan3" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             a. G0/2 มีแค่ IPv6 address<br/>
             b. G0/0 มี IPv4 address<br/>
             c. Tunnel interface มี IPv6 address
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan2">
             Router30
           </div>
-          <div class="text--primary labexplan3" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             a. G0/0 และ G0/2 มีแค่ IPv6 address
           </div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
+          <div class="text--primary labexplan">
             IPv6 Network จะใช้ Routing Protocol แบบ OSPFv3
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan2">
             : Router10 G0/2 ใช้ Area10<br/>
             : Router20 G0/2 ใช้ Area20<br/>
             : Router30 G0/0 ใช้ Area20 และ G0/2 ใช้ Area30
           </div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
+          <div class="text--primary labexplan">
             <span class="red--text">IPv4 Network</span> จะใช้ Routing Protocol แบบ EIGRP AS_Number คือ 100<br/>
             การเชื่อมต่อดังรูป<span class="red--text">ไม่จำเป็น</span>ต้องทำ Redistribute Routing<br/>
             การที่จะทำให้ IPv6 Network สามารถติดต่อข้ามเครือข่าย IPv4 ได้นั้นจำเป็นต้องใช้ Transition เช่น การทำ IPv6 Tunneling
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan2">
             ต้องสร้าง Tunnel Interface ที่ Router10 (เป็นต้นทาง) และ Router20 (เป็นปลายทาง) <strong>**ไม่มี</strong>การสร้าง Tunnel Interface ที่ Router0 โดยตัวอย่างคำสั่งการสร้าง Tunnel ที่ Router10 ดังนี้
           </div>
-          <div class="text--primary labexplan3" style="margin-top: 2px">
+          <div class="text--primary labexplan4command">
             > Router10(Config)# interface tunnel0<br/>
             > Router10(Config-if)# ipv6 address 2001:1212::1/64<br/>
             > Router10(Config-if)# ipv6 ospf {{message1}} area 0<br/>
@@ -67,7 +67,7 @@
             > Router10(Config-if)# tunnel mode ipv6ip
           </div>
           <div class="headline text--primary labexplan" style="margin-top: 15px">สิ่งที่ต้องการ</div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
+          <div class="text--primary labexplan">
             PC10, PC20 และ PC30 ต้องสามารถติดต่อหากันได้
           </div>
           <br/>
@@ -255,15 +255,24 @@ export default {
     margin: 1rem;
   }
   .labexplan {
+    margin-top: 2px;
     margin-left: 40px;
     margin-right: 40px;
   }
   .labexplan2 {
+    margin-top: 2px;
     margin-left: 50px;
     margin-right: 40px;
   }
   .labexplan3 {
+    margin-top: 2px;
     margin-left: 60px;
+    margin-right: 40px;
+  }
+  .labexplan4command {
+    background-color: cornsilk;
+    margin-top: 2px;
+    margin-left: 65px;
     margin-right: 40px;
   }
 </style>

@@ -7,56 +7,74 @@
           <h1 style="text-align: center">Assignment : LAB 6</h1>
           <div class="text--primary" style="text-align: center"><strong>ไฟล์การบ้าน:</strong> <a :href='downLoadURL'>คลิกเพื่อดาว์นโหลดไฟล์การบ้าน</a></div>
           <div style="margin-top: 20px;" align="center" justify="center">
-            <v-img src="@/assets/lab/lab6/lab6Assignment1.png"></v-img><br/>
+            <v-img src="@/assets/lab/lab6/lab6Assignment1.png"></v-img>
           </div>
           <div class="headline text--primary labexplan" style="margin-top:10px;">อธิบาย assignment</div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
-            กำหนดค่าการเชื่อมต่อดังรูปด้านบนโดย : <br/>
+          <div class="text--primary labexplan">
+            กำหนดค่าการเชื่อมต่อดังรูปด้านบนโดย : 
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan2">
             1.กำหนดค่าพื้นฐาน 
           </div>
-          <div class="text--primary labexplan3" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             - กำหนด IP address โดยทุก Subnet มี subnet mask คือ /24 แบบ Classful ให้กับอุปกรณ์ดังภาพด้านบน<br/>
-            - กำหนด Default Gateway ให้กับ PC ทุกเครื่อง ไปยัง G0/2 ของ Router ที่ทำการเชื่อมต่อ<br/>
+            - กำหนด Default Gateway ให้กับ PC ทุกเครื่อง ไปยัง G0/2 ของ Router ที่ทำการเชื่อมต่อ
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px;">
+          <div class="text--primary labexplan2">
             2.กำหนดค่า Cost ให้กับ Interface ดัง Figure 1 เพราะ OSPF มีการพิจารณา Cost ในการสร้าง
             Shortest-Path ด้วย Link-state Algorithm โดยมีค่า Cost เริ่มต้นอ้างอิง (Default OSPF Cost)
             จากประเภทของ Interface (แต่ละประเภทมี Bandwidth แตกต่างกัน) ดังตารางด้านล่าง
           </div>
           <div style="margin-top: 20px;" align="center" justify="center">
             <v-img width="500" src="@/assets/lab/lab6/InterfaceCost.png"></v-img><br/>
+            <div class="text--primary labexplan4command">
+              >	Router(config)# int {{msg1}}<br/>
+              >	Router(config-if)# ip ospf cost {{msg2}}
+            </div>
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan2">
             3.หลังจากกำหนดค่า Cost แล้วทำการสร้าง OSPF Process ID เป็น 10 (ซึ่งเป็นค่าระหว่าง 1-65535) ที่ Router แต่ละตัว เช่น Router0 กำหนดดังข้างล่าง โดยสามารถกำหนด OSPF Process ID เท่ากันได้ใน Router ตัวอื่น<br/>
             4.ทำการกำหนดค่า Network Address และ Wildcard mask ที่เป็น interface ของ Router รวมถึงกำหนด Area ที่ต้องการให้กับ OSPF เช่น Router0 กำหนดดังด้านล่าง
           </div>
-          <div class="text--primary labexampleexplan1" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             - การกำหนด Network Address และ Wildcard Masks
           </div>
-          <div class="text--primary labexampleexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             > Example 1: 172.16.10.0/24
           </div>
-          <div class="text--primary labexampleexplan3" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             172.16.10.0   = <span class="primary--text">10101100.00010000.00001010</span>.00000000<br/>
             255.255.255.0 = 11111111.11111111.11111111.00000000<br/>
             0.0.0.255     = 00000000.00000000.00000000.<span class="red--text">11111111</span>
           </div>
-          <div class="text--primary labexampleexplan2" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             > Example 2: 172.16.8.0/21
           </div>
-          <div class="text--primary labexampleexplan3" style="margin-top: 2px">
+          <div class="text--primary labexplan3">
             172.168.8.0   = <span class="primary--text">10101100.00010000.00001</span>000.00000000<br/>
             255.255.248.0 = 11111111.11111111.11111000.00000000<br/>
             0.0.0.7.255   = 00000000.00000000.00000<span class="red--text">111.11111111</span>
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
-            5.ตรวจสอบและสังเกตการกำหนดค่าของ OSPF ได้ด้วยหลาย command (ลองสังเกตค่า Cost สำหรับแต่ละ Network ปลายทาง)<br/>
+          <div class="text--primary labexplan4command">
+            >	Router0(config-router)# network {{msg3}} {{msg4}} area {{msg5}}<br/>
+            >	Router0(config-router)# network 192.168.10.0 0.0.0.255 area 10<br/>
+            >	Router0(config-router)# network 1.1.5.0 0.0.0.255 area 10<br/>
+            >	Router0(config-router)# network 1.1.4.0 0.0.0.255 area 10
+          </div>
+          <div class="text--primary labexplan2">
+            5.ตรวจสอบและสังเกตการกำหนดค่าของ OSPF ได้ด้วยหลาย command (ลองสังเกตค่า Cost สำหรับแต่ละ Network ปลายทาง)
+          </div>
+          <div class="text--primary labexplan4command">
+            >	#show ip route ospf<br/>
+            >	#show ip ospf interfaces<br/>
+            >	#show ip protocols<br/>
+            >	#show ip ospf
+          </div>
+          <div class="text--primary labexplan2">
             6.กำหนดค่า OSPF ตามภาพด้านบนให้กับ Router ตัวอื่นๆ
           </div>
           <div class="headline text--primary labexplan" style="margin-top: 15px">สิ่งที่ต้องการ</div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
+          <div class="text--primary labexplan">
             PC0, PC1 และ PC2 ต้องสามารถติดต่อหากันได้
           </div>
           <br/>
@@ -80,11 +98,11 @@
               <h1 class="text--primary" style="text-align: center">คำถามก่อนส่ง Assignment</h1><br/>
               <v-radio-group v-model="quest1.title" class="labexplan" style="margin-top: 5px">
                 <div>{{quest1.headermsg}}</div>
-                <v-radio class="labexplan2" style="margin-top: 2px" v-for="citem in choice1" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
+                <v-radio class="labexplan2" v-for="citem in choice1" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
               </v-radio-group>
               <v-radio-group v-model="quest2.title" class="labexplan" style="margin-top: 5px">
                 <div>{{quest2.headermsg}}</div>
-                <v-radio class="labexplan2" style="margin-top: 2px" v-for="citem in choice2" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
+                <v-radio class="labexplan2" v-for="citem in choice2" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
               </v-radio-group>
 
               <div v-if="checked" class="d-flex justify-space-around mb-6 outlined">
@@ -125,6 +143,11 @@ export default {
   components: { LoginComponent },
   data() {
     return {
+      msg1: "<ชื่อ interface>",
+      msg2: "<ค่า cost>",
+      msg3: "<network_address>",
+      msg4: "<wildcard_mask>",
+      msg5: "<area>",
       downLoadURL: '',
       readyToDoQuest: false,
       name: 'LAB2',
@@ -241,27 +264,24 @@ export default {
     margin: 1rem;
   }
   .labexplan {
+    margin-top: 2px;
     margin-left: 40px;
     margin-right: 40px;
   }
   .labexplan2 {
+    margin-top: 2px;
     margin-left: 50px;
     margin-right: 40px;
   }
   .labexplan3 {
+    margin-top: 2px;
     margin-left: 60px;
     margin-right: 40px;
   }
-  .labexampleexplan1 {
-    margin-left: 70px;
-    margin-right: 40px;
-  }
-  .labexampleexplan2 {
-    margin-left: 80px;
-    margin-right: 40px;
-  }
-  .labexampleexplan3 {
-    margin-left: 90px;
+  .labexplan4command {
+    background-color: cornsilk;
+    margin-top: 2px;
+    margin-left: 65px;
     margin-right: 40px;
   }
 </style>

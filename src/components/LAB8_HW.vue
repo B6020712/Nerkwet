@@ -10,39 +10,158 @@
             <v-img src="@/assets/lab/lab8/lab8Assignment1.png"></v-img><br/>
           </div>
           <div class="headline text--primary labexplan" style="margin-top:10px;">อธิบาย assignment</div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
+          <div class="text--primary labexplan">
             1.Server cpe.sut.acth, www.sut.ac.th, DNS server ไม่จำเป็นต้องกำหนดค่า แต่สามารถตรวจสอบความถูกต้องได้<br/>
-            2.กำหนดค่า IP Addresses ตาม Figure 2 (ระวังเรื่อง Network Address และ NetMask ด้วย)<br/>
+            2.กำหนดค่า IP Addresses ตาม Figure 2 (ระวังเรื่อง Network Address และ NetMask ด้วย)
+          </div>
+          <div class="text--primary labexplan2">
+            a) ที่ Router3 Interface ขาใน G0/2 (Network Address เป็น 172.16.1.4/30 จะมี Netmask คือ 255.255.255.252)<br/>
+            b) ที่ Router3 Interface ขานอก G0/1 (Network Address เป็น 200.200.10.0/29 จะมี Netmask คือ 255.255.255.248)
+          </div>
+          <div class="labexplan3">
+            <v-btn class="outlined" color="primary" @click="showCommand2Med">Command</v-btn>
+          </div>
+          <div v-if="showCommand2">
+            <div class="text--primary labexplan3">
+              a) ที่ Router3 Interface ขาใน G0/2 (Network Address เป็น 172.16.1.4/30 จะมี Netmask คือ 255.255.255.252)
+            </div>
+            <div class="text--primary labexplan4command">
+              > Router3(Config-if)# ip address 172.16.1.5 255.255.255.252
+            </div>
+            <div class="text--primary labexplan3">
+              b) ที่ Router3 Interface ขานอก G0/1 (Network Address เป็น 200.200.10.0/29 จะมี Netmask คือ 255.255.255.248)
+            </div>
+            <div class="text--primary labexplan4command">
+              > Router3(Config-if)# ip address 200.200.10.2 255.255.255.248
+            </div>
+          </div>
+          <div class="text--primary labexplan2">
             3.กำหนดค่าการทำงานของ NAT ที่ Router3 เป็น Static NAT
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
-            > กำหนด Static NAT ให้กับ cpe.sut.ac.th โดยจับคู่ PrivateIP 172.16.1.2 กับ PublicIP 200.200.10.3 <br/>
-            > กำหนด Static NAT ให้กับ www.sut.ac.th โดยจับคู่ PrivateIP 172.16.1.6 กับ PublicIP 200.200.10.4<br/>
-            > ทำการระบุฝั่ง inside และ outside สำหรับ NAT ให้แต่ละ Interface
+          <div class="text--primary labexplan3">
+            a) กำหนด Static NAT ให้กับ cpe.sut.ac.th โดยจับคู่ PrivateIP 172.16.1.2 กับ PublicIP 200.200.10.3 <br/>
+            b) กำหนด Static NAT ให้กับ www.sut.ac.th โดยจับคู่ PrivateIP 172.16.1.6 กับ PublicIP 200.200.10.4<br/>
+            c) ทำการระบุฝั่ง inside และ outside สำหรับ NAT ให้แต่ละ Interface
           </div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
-            4.กำหนดค่า Routing เป็น EIGRP AS Number 100 ทั้ง Router3 G0/1, Router1 G0/0 และ Se0/0/0, Router0 Se0/0/0, Se0/0/1 และ G0/1, Router2 Se0/0/1<br/>
-            5.ตรวจสอบค่า DNS Server ว่าถูกต้องไหม (พร้อมตรวจสอบ IP address และ Default Gateway)<br/>
+          <div class="text--primary labexplan2">
+            4.กำหนดค่า Routing เป็น EIGRP AS Number 100 ทั้ง Router3 G0/1, Router1 G0/0 และ Se0/0/0, Router0 Se0/0/0, Se0/0/1 และ G0/1, Router2 Se0/0/1
+          </div>
+          <div class="labexplan3">
+            <v-btn class="outlined" color="primary" @click="showCommand4Med">Command</v-btn>
+          </div>
+          <div v-if="showCommand4">
+            <div class="text--primary labexplan3">
+              ยกตัวอย่างการกำหนดค่า EGRP AS 100 ให้ Router1 คือ
+            </div>
+            <div class="text--primary labexplan4command">
+              >	Router1(Config)# router eigrp 100<br/>
+              >	Router1(Config-router)# network 200.100.10.0 0.0.0.3<br/>
+              >	Router1(Config-router)# network 200.200.10.0 0.0.0.7
+            </div>
+          </div>
+          <div class="text--primary labexplan">
+            5.ตรวจสอบค่า DNS Server ว่าถูกต้องไหม (พร้อมตรวจสอบ IP address และ Default Gateway)
+          </div>
+          <div style="margin-top: 10px;" align="center" justify="center">
+            <v-img width="500" src="@/assets/lab/lab8/lab8Stuff1.png"></v-img><br/>
+          </div>
+          <div class="text--primary labexplan">
             6.กำหนดค่า NAT Overload (PAT) และ Static Route ที่ Router2
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
-            > กำหนด Access-List สำหรับการทำ NAT สำหรับ Vlan 10 และ Vlan 20 ที่ Router2<br/>
-            > กำหนดค่า Pool สำหรับ NAT และนำไปทำงานร่วมกับ Access-List ที่ได้สร้างไว้แบบประเภท NAT Overload (Keyword Overload จะหมายถึงมีการนำค่า Port มาร่วมในการแปลง)<br/>
-            > จากรูปเห็นได้ว่าฝั่ง G0/0 จำเป็นต้องกำหนด Static Route ไปยัง Network Vlan 10 (192.168.10.0/24) และ Vlan 20 (192.168.20.0/24) ด้วย<br/>
-            > ทำการระบฝั่ง inside และ outside สำหรับ NAT ให้แต่ละ Interface
+          <div class="text--primary labexplan2">
+            a) กำหนด Access-List สำหรับการทำ NAT สำหรับ Vlan 10 และ Vlan 20 ที่ Router2<br/>
+            b) กำหนดค่า Pool สำหรับ NAT และนำไปทำงานร่วมกับ Access-List ที่ได้สร้างไว้แบบประเภท NAT Overload (Keyword Overload จะหมายถึงมีการนำค่า Port มาร่วมในการแปลง)<br/>
+            c) จากรูปเห็นได้ว่าฝั่ง G0/0 จำเป็นต้องกำหนด Static Route ไปยัง Network Vlan 10 (192.168.10.0/24) และ Vlan 20 (192.168.20.0/24) ด้วย<br/>
+            d) ทำการระบุฝั่ง inside และ outside สำหรับ NAT ให้แต่ละ Interface
           </div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
+          <div class="labexplan3">
+            <v-btn class="outlined" color="primary" @click="showCommand6Med">Command</v-btn>
+          </div>
+          <div v-if="showCommand6">
+            <div class="text--primary labexplan3">
+              a) กำหนด Access-List สำหรับการทำ NAT สำหรับ Vlan 10 และ Vlan 20 ที่ Router2<br/>
+            </div>
+            <div class="text--primary labexplan4command">
+              >	Router2(Config)# ip access-list standard NAT_ACL<br/>
+              >	Router2(config-std-nacl)# permit {{msg1}}
+            </div>
+            <div class="text--primary labexplan3">
+              b) กำหนดค่า Pool สำหรับ NAT และนำไปทำงานร่วมกับ Access-List ที่ได้สร้างไว้แบบประเภท NAT Overload (Keyword Overload จะหมายถึงมีการนำค่า Port มาร่วมในการแปลง)<br/>
+            </div>
+            <div class="text--primary labexplan4command">
+              >	Router2(config)# ip nat pool NAT 200.100.10.11 200.100.10.12 netmask 255.255.255.248<br/>
+              >	Router2(config)# ip nat inside source list {{msg2}} pool {{msg3}} overload
+            </div>
+            <div class="text--primary labexplan3">
+              d) ทำการระบุฝั่ง inside และ outside สำหรับ NAT ให้แต่ละ Interface
+            </div>
+            <div class="text--primary labexplan4command">
+              >	ใช้คำสั่ง Router2(Config-if)# ip nat inside ให้กับ Interface G0/0<br/>
+              >	ใช้คำสั่ง Router2(Config-if)# ip nat outside ให้กับ Interface Se0/0/1
+            </div>
+          </div>
+          <div class="text--primary labexplan">
             7.กำหนด Multilayer Switch ในส่วน Vlan 10 และ Vlan 20 และเพิ่มการทำงานในส่วน Network Layer (Layer3) คล้าย Router
           </div>
-          <div class="text--primary labexplan2" style="margin-top: 2px">
-            > กำหนด Vlan 10 และ Vlan 20 เป็น mode access<br/>
-            > กำหนด Switch Virtual Interface (SVI) ซึ่งเป็น Logical Interface เพื่อให้ L3 Switch สามารถกำหนด IP address ที่ Logical Interface ไว้เป็น Default Gateway ให้กับ Vlan10 และ Vlan 20<br/>
-            > กำหนด IP address ให้กับ g1/0/24 เพื่อทำงานแบบ Layer 3 FastEthernet port (ไม่ต้องมี Vlan)<br/>
-            > กำหนดค่าในเรื่อง Routing โดยถ้าเป็น Multilayer Switch จำเป็นต้องเปิดการทำงาน Routing ก่อน<br/>
-            > กำหนดค่าในส่วน DHCP ให้กับ Network ข้างหลังคือ Vlan 10 และ Vlan 20 เพราะ PC0 และ PC1 ในนี้จะไม่มีการกำหนดค่า IP address, Default Gateway และ DNS Server
+          <div class="text--primary labexplan2">
+            a) กำหนด Vlan 10 และ Vlan 20 เป็น mode access<br/>
+            b) กำหนด Switch Virtual Interface (SVI) ซึ่งเป็น Logical Interface เพื่อให้ L3 Switch สามารถกำหนด IP address ที่ Logical Interface ไว้เป็น Default Gateway ให้กับ Vlan10 และ Vlan 20<br/>
+            c) กำหนด IP address ให้กับ g1/0/24 เพื่อทำงานแบบ Layer 3 FastEthernet port (ไม่ต้องมี Vlan)<br/>
+            d) กำหนดค่าในเรื่อง Routing โดยถ้าเป็น Multilayer Switch จำเป็นต้องเปิดการทำงาน Routing ก่อน<br/>
+            e) กำหนดค่าในส่วน DHCP ให้กับ Network ข้างหลังคือ Vlan 10 และ Vlan 20 เพราะ PC0 และ PC1 ในนี้จะไม่มีการกำหนดค่า IP address, Default Gateway และ DNS Server
+          </div>
+          <div class="labexplan3">
+            <v-btn class="outlined" color="primary" @click="showCommand7Med">Command</v-btn>
+          </div>
+          <div v-if="showCommand7">
+            <div class="text--primary labexplan3">
+              a) กำหนด Vlan 10 และ Vlan 20 เป็น mode access เช่น
+            </div>
+            <div class="text--primary labexplan4command">
+              >	Switch0(Config)# vlan 10<br/>
+              >	Switch0(Config)# interface g1/0/1<br/>
+              >	Switch0(Config-if)# switchport mode access<br/>
+              >	Switch0(Config-if)# switchport access vlan 10<br/>
+              >	ลองกำหนดเองให้ Vlan 20
+            </div>
+            <div class="text--primary labexplan3">
+              b) กำหนด Switch Virtual Interface (SVI) ซึ่งเป็น Logical Interface เพื่อให้ L3 Switch สามารถกำหนด IP address ที่ Logical Interface ไว้เป็น Default Gateway ให้กับ Vlan10 และ Vlan 20
+            </div>
+            <div class="text--primary labexplan4command">
+              >	Switch0(Config)# interface vlan 10<br/>
+              >	Switch0(Config-if)# ip address 192.168.10.1 255.255.255.0<br/>
+              >	ลองกำหนดเองให้ Vlan 20
+            </div>
+            <div class="text--primary labexplan3">
+              c) กำหนด IP address ให้กับ g1/0/24 เพื่อทำงานแบบ Layer 3 FastEthernet port (ไม่ต้องมี Vlan)
+            </div>
+            <div class="text--primary labexplan4command">
+              >	Switch0(Config)# interface g1/0/24<br/>
+              >	Switch0(Config-if)# no switchport<br/>
+              >	Switch0(Config-if)# ip address 172.16.1.2 255.255.255.252
+            </div>
+            <div class="text--primary labexplan3">
+              d) กำหนดค่าในเรื่อง Routing โดยถ้าเป็น Multilayer Switch จำเป็นต้องเปิดการทำงาน Routing ก่อน
+            </div>
+            <div class="text--primary labexplan4command">
+              >	Switch0(Config)# ip routing
+              >	กำหนดค่า static route สามารถติดต่อกับข้างนอกได้ (เช่น การกำหนดเป็น Default Route ออกไป)
+            </div>
+            <div class="text--primary labexplan3">
+              e) กำหนดค่าในส่วน DHCP ให้กับ Network ข้างหลังคือ Vlan 10 และ Vlan 20 เพราะ PC0 และ PC1 ในนี้จะไม่มีการกำหนดค่า IP address, Default Gateway และ DNS Server
+            </div>
+            <div class="text--primary labexplan4command">
+              >	Switch0(Config)# ip dhcp excluded-address 192.168.20.1<br/>
+              >	Switch0(Config)# ip dhcp excluded-address 192.168.10.1 192.168.10.20<br/>
+              >	Switch0(Config)# ip dhcp pool VLAN10<br/>
+              >	Switch0(dhcp-config)# network 192.168.10.0 255.255.255.0<br/>
+              >	Switch0(dhcp-config)# default-router {{msg4}}<br/>
+              >	Switch0(dhcp-config)# dns-server {{msg5}}<br/>
+              >	ลองกำหนดค่า DHCP ให้ VLAN20
+            </div>
           </div>
           <div class="headline text--primary labexplan" style="margin-top: 15px">สิ่งที่ต้องการ</div>
-          <div class="text--primary labexplan" style="margin-top: 2px">
+          <div class="text--primary labexplan">
             สามารถ Ping จาก PC0 และ PC1 ไปยัง www.sut.ac.th และ cpe.sut.ac.th ได้<br/>
             <span class="red--text">(ในการ Ping ครั้งแรกอาจใช้เวลาสักเล็กน้อย)</span>
           </div>
@@ -112,6 +231,15 @@ export default {
   components: { LoginComponent },
   data() {
     return {
+      msg1: "<Network Address> <Wildcard Address>",
+      msg2: "<ACL-name>",
+      msg3: "<Pool-name>",
+      msg4: "<ip_address_ที่ต้องการให้เป็นDefaultGateway>",
+      msg5: "<ip_address_DNS_Server>",
+      showCommand2: false,
+      showCommand4: false,
+      showCommand6: false,
+      showCommand7: false,
       downLoadURL: '',
       readyToDoQuest: false,
       name: 'LAB2',
@@ -174,12 +302,12 @@ export default {
     })
   },
   methods: {
-    toLab8() { 
-      this.$router.push("/lab8"); 
-    },
-    toLab9() { 
-      this.$router.push("/lab9"); 
-    },
+    toLab8() { this.$router.push("/lab8") },
+    toLab9() { this.$router.push("/lab9") },
+    showCommand2Med() { this.showCommand2 = (this.showCommand2 == true) ? false : true },
+    showCommand4Med() { this.showCommand4 = (this.showCommand4 == true) ? false : true },
+    showCommand6Med() { this.showCommand6 = (this.showCommand6 == true) ? false : true },
+    showCommand7Med() { this.showCommand7 = (this.showCommand7 == true) ? false : true },
     checkResult (LAB2_NO1, LAB2_NO2) {
       if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 
         this.passSign = true;
@@ -228,15 +356,24 @@ export default {
     margin: 1rem;
   }
   .labexplan {
+    margin-top: 2px;
     margin-left: 40px;
     margin-right: 40px;
   }
   .labexplan2 {
+    margin-top: 2px;
     margin-left: 50px;
     margin-right: 40px;
   }
   .labexplan3 {
+    margin-top: 2px;
     margin-left: 60px;
+    margin-right: 40px;
+  }
+  .labexplan4command {
+    background-color: cornsilk;
+    margin-top: 2px;
+    margin-left: 65px;
     margin-right: 40px;
   }
 </style>
