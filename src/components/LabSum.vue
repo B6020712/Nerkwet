@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-row width="90%">
-        <v-col v-for="item in items1" :key="item.title" link width="25%">
+        <v-col v-for="(item, index) in items1" :key="item.title" link width="25%">
           <v-card class="card" color="blue lighten-5"><div class="div1">{{item.title}}</div><div class="div2">{{item.head}}</div>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn v-on:click="goto(item.action)" class="ma-2" outlined color="indigo">LAB</v-btn>
-              <!-- <v-btn v-on:click="goto(item.action2)" class="ma-2" outlined color="red">Assignment</v-btn> -->
+              <v-btn v-if="index != 0" v-on:click="goto(item.action2)" class="ma-2" outlined color="red">Assignment</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       items1: [
-        { title: 'BEFORE LAB', head: 'Downloading Cisco Packet Tracer' , action: "/beforelab" , action2: "/lab0_hw"},
+        { title: 'BEFORE LAB', head: 'Downloading Cisco Packet Tracer' , action: "/beforelab" },
         { title: 'LAB 1', head: 'Basic Configuration' , action: "/lab1" , action2: "/lab1_hw"},
         { title: 'LAB 2', head: 'IP Addressing' , action: "/lab2" , action2: "/lab2_hw"},
       ],

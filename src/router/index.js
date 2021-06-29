@@ -15,8 +15,8 @@ import LAB8 from '../components/LAB8.vue'
 import LAB9 from '../components/LAB9.vue'
 import LAB10 from '../components/LAB10.vue'
 
-// import LAB1_HW from '../components/LAB1_HW.vue'
-// import LAB2_HW from '../components/LAB2_HW.vue'
+import LAB1_HW from '../components/LAB1_HW.vue'
+import LAB2_HW from '../components/LAB2_HW.vue'
 import LAB3_HW from '../components/LAB3_HW.vue'
 import LAB4_HW from '../components/LAB4_HW.vue'
 import LAB5_HW from '../components/LAB5_HW.vue'
@@ -42,8 +42,8 @@ const routes = [
   { path: '/lab9', component: LAB9 , meta: {requireAuth: true} }, 
   { path: '/lab10', component: LAB10 , meta: {requireAuth: true} },
 
-  // { path: '/lab1_hw', component: LAB1_HW , meta: {requireAuth: true} }, 
-  // { path: '/lab2_hw', name: 'LAB2_HW', component: LAB2_HW , meta: {requireAuth: true} }, 
+  { path: '/lab1_hw', component: LAB1_HW , meta: {requireAuth: true} }, 
+  { path: '/lab2_hw', component: LAB2_HW , meta: {requireAuth: true} }, 
   { path: '/lab3_hw', component: LAB3_HW , meta: {requireAuth: true} }, 
   { path: '/lab4_hw', component: LAB4_HW , meta: {requireAuth: true} }, 
   { path: '/lab5_hw', component: LAB5_HW , meta: {requireAuth: true} }, 
