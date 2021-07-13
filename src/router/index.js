@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import firebase from 'firebase'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import TA from '../components/TA.vue'
 import BeforeLAB from '../components/BeforeLAB.vue'
 import LAB1 from '../components/LAB1.vue'
 import LAB2 from '../components/LAB2.vue'
@@ -13,7 +14,6 @@ import LAB6 from '../components/LAB6.vue'
 import LAB7 from '../components/LAB7.vue'
 import LAB8 from '../components/LAB8.vue'
 import LAB9 from '../components/LAB9.vue'
-import LAB10 from '../components/LAB10.vue'
 
 import LAB1_HW from '../components/LAB1_HW.vue'
 import LAB2_HW from '../components/LAB2_HW.vue'
@@ -30,7 +30,10 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', name: 'Login', component: Login },
   { path: '/home', name: 'Home', component: Home , meta: {requireAuth: true} },
-  { path: '/beforelab', component: BeforeLAB , meta: {requireAuth: true}},
+  { path: '/beforelab', component: BeforeLAB , meta: {requireAuth: true} },
+  
+  { path: '/ta', name: 'TA', component: TA , meta: {requireAuth: true} },
+  
   { path: '/lab1', component: LAB1 , meta: {requireAuth: true} }, 
   { path: '/lab2', name: 'LAB2', component: LAB2 , meta: {requireAuth: true} }, 
   { path: '/lab3', component: LAB3 , meta: {requireAuth: true} }, 
@@ -40,7 +43,6 @@ const routes = [
   { path: '/lab7', component: LAB7 , meta: {requireAuth: true} }, 
   { path: '/lab8', component: LAB8 , meta: {requireAuth: true} }, 
   { path: '/lab9', component: LAB9 , meta: {requireAuth: true} }, 
-  { path: '/lab10', component: LAB10 , meta: {requireAuth: true} },
 
   { path: '/lab1_hw', component: LAB1_HW , meta: {requireAuth: true} }, 
   { path: '/lab2_hw', component: LAB2_HW , meta: {requireAuth: true} }, 
@@ -51,7 +53,6 @@ const routes = [
   { path: '/lab7_hw', component: LAB7_HW , meta: {requireAuth: true} }, 
   { path: '/lab8_hw', component: LAB8_HW , meta: {requireAuth: true} }, 
   { path: '/lab9_hw', component: LAB9_HW , meta: {requireAuth: true} }, 
-  // { path: '/lab10_hw', component: LAB10 , meta: {requireAuth: true} }
 ]
 
 const router = new VueRouter({

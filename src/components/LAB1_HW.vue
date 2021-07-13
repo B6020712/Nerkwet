@@ -5,19 +5,37 @@
         <v-card class="mx-auto">
           <br/>
           <h1 style="text-align: center">Assignment : LAB 1</h1>
-          <div class="text--primary" style="text-align: center"><strong>ไฟล์การบ้าน:</strong> <a :href='downLoadURL'>คลิกเพื่อดาว์นโหลดไฟล์การบ้าน</a></div>
-          <div style="margin-top: 20px;" align="center" justify="center">
-            <!-- <v-img src="@/assets/lab/lab6/lab6Assignment1.png"></v-img> -->
-          </div>
           <div class="headline text--primary labexplan" style="margin-top:10px;">อธิบาย assignment</div>
           <div class="text--primary labexplan">
+            1.กำหนดค่าให้ Router 4321<br/>
+            2.ทำการ assign ip ใหกับ interface loopback 0 และ interface loopback 1 ด้วย ip address 192.168.0.1/24 , 192.168.1.1/24 ตามลำดับ
           </div>
           <div class="text--primary labexplan2">
+            >	(config)# interface loopback 0<br/>
+            >	(config-if)# ip address 192.168.0.1 255.255.255.0<br/>
+            >	(config-if)# interface loopback 1<br/>
+            >	(config-if)# ip address 192.168.1.1 255.255.255.0<br/>
+            >	(config-if)# shut
           </div>
-          <div class="text--primary labexplan3">
+          <div class="text--primary labexplan">
+            3.จากนั้นย้อนกลับไปที่ privileged mode แล้วทำการ ping หมายเลข IP 192.168.0.1 และ 192.168.1.1
+          </div>
+          <div class="text--primary labexplan2">
+            >	ping 192.168.0.1<br/>
+            >	ping 192.168.1.1
+          </div>
+          <div class="text--primary labexplan">
+            4.ทำการ backup running configuration เก็บไว้ที่ flash storage ตั้งชื่อไฟล์ backup.txt
+          </div>
+          <div class="text--primary labexplan2">
+            # copy running-config flash:
+          </div>
+          <div class="text--primary labexplan">
+            5.ไปที่ Physical เพื่อปิดแล้วเปิดเครื่องใหม่ จากนั้นทำการ restore configuration backup.txt  พร้อมแสดงผล running configuration
           </div>
           <div class="headline text--primary labexplan" style="margin-top: 15px">สิ่งที่ต้องการ</div>
           <div class="text--primary labexplan">
+            ทำตามคำอธิบายด้านบน บันทึกเป็นไฟล์ .pkt และอัพโหลดไฟล์
           </div>
           <br/>
         </v-card>
@@ -87,24 +105,24 @@ export default {
     return {
       downLoadURL: '',
       readyToDoQuest: false,
-      name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. ' },
-      quest2: { title: 'lab2_no2', headermsg: '2. ' },
+      name: 'LAB1',
+      quest1: { title: 'lab1_no1', headermsg: '1. ข้อใดคือความแตกต่างของ enable password กับ enable secret' },
+      quest2: { title: 'lab1_no2', headermsg: '2. ที่ขั้นตอนที่ 4 หากทำการ ping 192.168.1.1 จะมีการ response กลับมาหรือไม่เพราะเหตุใด' },
       choice1: [
-        { no: 1, msg: '' },
-        { no: 2, msg: '' },
-        { no: 3, msg: '' },
-        { no: 4, msg: '' },
+        { no: 1, msg: 'enable password ผ่านการ encoding ส่วน enable secret ไม่ผ่านการ encoding' },
+        { no: 2, msg: 'enable password ไม่ผ่านการ encoding ส่วน enable secret ผ่านการ encoding' },
+        { no: 3, msg: 'enable password ผ่านการเข้ารหัสแบบ SHA256 ส่วน enable secret ผ่านการเข้ารหัสแบบ SHA512' },
+        { no: 4, msg: 'enable password ผ่านการเข้ารหัสแบบ SHA512 ส่วน enable secret ผ่านการเข้ารหัสแบบ SHA256' },
       ],
       choice2: [
-        { no: 1, msg: '' },
-        { no: 2, msg: '' },
-        { no: 3, msg: '' },
-        { no: 4, msg: '' },
+        { no: 1, msg: 'ไม่มีการ response เนื่องจาก interface loopback 1 ถูก shutdown' },
+        { no: 2, msg: 'ไม่มีการ response เนื่องจาก interface loopback 0 ถูก shutdown' },
+        { no: 3, msg: 'มีการ response เนื่องจาก interface loopback 1 ไม่ถูก shutdown' },
+        { no: 4, msg: 'มีการ response เนื่องจาก interface loopback 0 ไม่ถูก shutdown' },
       ],
       dialog: false,
-      lab2_no1: Number,
-      lab2_no2: Number,
+      lab1_no1: Number,
+      lab1_no2: Number,
       passSign : false,
       checked: true,
       user : {
@@ -121,24 +139,6 @@ export default {
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
-      var starsRef = storage.ref().child('labAssignment/Lab6_Std.pkt'); //อย่าลืมแก้
-      starsRef.getDownloadURL()
-      .then((url) => {
-        this.downLoadURL = url;
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case 'storage/object-not-found':
-            break;
-          case 'storage/unauthorized':
-            break;
-          case 'storage/canceled':
-            break;
-          case 'storage/unknown':
-            break;
-        }
-      });
-      
       this.logInSign = !!user;
       if(user) {
         this.email = user.email;
@@ -149,8 +149,8 @@ export default {
   methods: {
     toLab1() { this.$router.push("/lab1") },
     toLab2() { this.$router.push("/lab2") },
-    checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 4 && LAB2_NO2 == 3) { 
+    checkResult (LAB1_NO1, LAB1_NO2) {
+      if (LAB1_NO1 == 2 && LAB1_NO2 == 1) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 
@@ -167,10 +167,11 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
+      const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
       const saveName = email + "_LAB1Assignment1";
       var metadata = { contentType: this.myFiles.type };
       // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
-      const uploadTask = storage.ref().child(this.email + "/LAB1/" + saveName).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(email + "/LAB1/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -184,7 +185,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB1/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(email + "/LAB1/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

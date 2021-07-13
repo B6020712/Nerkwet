@@ -198,7 +198,7 @@
               </div>
 
               <div v-if="passSign">
-                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
+                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt</strong></p>
                 <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
                 <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
                 <v-row>
@@ -242,24 +242,22 @@ export default {
       showCommand7: false,
       downLoadURL: '',
       readyToDoQuest: false,
-      name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. Right Group เป็น Classful แบบใด' },
-      quest2: { title: 'lab2_no2', headermsg: '2. Left Group เป็น Classful แบบใด' },
+      name: 'LAB8',
+      quest1: { title: 'lab8_no1', headermsg: '1. Port Security และ ACL แตกต่างกันอย่างไร' },
+      quest2: { title: 'lab8_no2', headermsg: '2. สามารถเปิด wwww.sut.ac.th จาก PC1 และ PC0 ได้หรือไม่' },
       choice1: [
-        { no: 1, msg: 'A' },
-        { no: 2, msg: 'B' },
-        { no: 3, msg: 'C' },
-        { no: 4, msg: 'D' },
+        { no: 1, msg: 'Port Security จะสนใจที่ระดับ Layer 1 , ACL สนใจที่ระดับ 2' },
+        { no: 2, msg: 'Port Security จะสนใจที่ระดับ Layer 2 , ACL สนใจที่ระดับ Layer 2 และ 4' },
+        { no: 3, msg: 'Port Security จะสนใจที่ระดับ Layer 3 และ 4 , ACL สนใจที่ระดับ Layer 2' },
+        { no: 4, msg: 'Port Security จะสนใจที่ระดับ Layer 2 , ACL สนใจที่ระดับ Layer 3 และ 4' },
       ],
       choice2: [
-        { no: 1, msg: 'E' },
-        { no: 2, msg: 'Z' },
-        { no: 3, msg: 'G' },
-        { no: 4, msg: 'DA' },
+        { no: 1, msg: 'ได้' },
+        { no: 2, msg: 'ไม่ได้' },
       ],
       dialog: false,
-      lab2_no1: Number,
-      lab2_no2: Number,
+      lab8_no1: Number,
+      lab8_no2: Number,
       passSign : false,
       checked: true,
       user : {
@@ -308,8 +306,8 @@ export default {
     showCommand4Med() { this.showCommand4 = (this.showCommand4 == true) ? false : true },
     showCommand6Med() { this.showCommand6 = (this.showCommand6 == true) ? false : true },
     showCommand7Med() { this.showCommand7 = (this.showCommand7 == true) ? false : true },
-    checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 
+    checkResult (LAB8_NO1, LAB8_NO2) {
+      if (LAB8_NO1 == 4 && LAB8_NO2 == 1) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 
@@ -326,10 +324,11 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
+      const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
       const saveName = email + "_LAB8Assignment1";
       var metadata = { contentType: this.myFiles.type };
       // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
-      const uploadTask = storage.ref().child(this.email + "/LAB8/" + saveName).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(email + "/LAB8/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -343,7 +342,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB8/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(email + "/LAB8/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

@@ -80,7 +80,7 @@
           <v-card-text>
             <div class="text--primary" v-if="!readyToDoQuest">
               <h2 style="text-align: center">คำถามก่อนส่ง Assignment</h2>
-              <div style="text-align: center">คำถามมีทั้งหมด 2 ข้อ เป็นแบบ choice</div>
+              <div style="text-align: center">คำถามมีทั้งหมด 1 ข้อ เป็นแบบ choice</div>
               <div style="text-align: center">หากตอบคำถามถูกทุกข้อจะสามารถส่งไฟล์ได้</div><br />
               <div class="d-flex justify-space-around mb-6 outlined">
                 <v-spacer></v-spacer><v-btn color="indigo" @click="requestQuest">Question</v-btn><v-spacer></v-spacer>
@@ -93,17 +93,18 @@
                 <div>{{quest1.headermsg}}</div>
                 <v-radio v-for="citem in choice1" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
               </v-radio-group>
-              <v-radio-group v-model="quest2.title" style="margin-left: 10px">
+              <!-- <v-radio-group v-model="quest2.title" style="margin-left: 10px">
                 <div>{{quest2.headermsg}}</div>
                 <v-radio v-for="citem in choice2" :key="citem.no" :value="citem.no" :label="citem.msg"></v-radio>
-              </v-radio-group>
+              </v-radio-group> -->
 
               <div v-if="checked" class="d-flex justify-space-around mb-6 outlined">
-                <v-btn color="red" @click="checkResult(quest1.title, quest2.title)">Check</v-btn>
+                <v-btn color="red" @click="checkResult(quest1.title)">Check</v-btn>
+                <!-- <v-btn color="red" @click="checkResult(quest1.title, quest2.title)">Check</v-btn> -->
               </div>
 
               <div v-if="passSign">
-                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
+                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt</strong></p>
                 <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
                 <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{uploadValue}}%</v-progress-circular>
                 <v-row>
@@ -141,24 +142,24 @@ export default {
       message3 : "<ip_address>",
       downLoadURL: '',
       readyToDoQuest: false,
-      name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. Right Group เป็น Classful แบบใด' },
-      quest2: { title: 'lab2_no2', headermsg: '2. Left Group เป็น Classful แบบใด' },
+      name: 'LAB7',
+      quest1: { title: 'lab7_no1', headermsg: '1. ทำไม Router0 ถึงไม่จำเป็นต้องมีการสร้าง tunnel สำหรับการติดต่อจาก PC10 ไปยัง PC20' },
+      quest2: { title: 'lab7_no2', headermsg: '2. ' },
       choice1: [
-        { no: 1, msg: 'A' },
-        { no: 2, msg: 'B' },
-        { no: 3, msg: 'C' },
-        { no: 4, msg: 'D' },
+        { no: 1, msg: 'ที่ Router0 มีการกำหนด Static Route ว่าถ้า PC10 ต้องการส่ง Packet ไปที่ PC20 ให้ส่งไปที่ Interface Gig0/0 ของ Router20' },
+        { no: 2, msg: 'เนื่องจากอยู่ใน Area เดียวกันจึงไม่ต้องสร้าง Tunnel' },
+        { no: 3, msg: 'การสร้าง Tunnel จะไม่สนใจ Router กลางทางที่ผ่าน จะสนใจแค่ต้นทางและปลายทาง ซึ่งก็คือ Router10 และ Router20 เท่านั้น' },
+        { no: 4, msg: 'Tunnel ไม่มีผลในการส่งข้อมูลระหว่าง PC10 และ PC20 จึงไม่จำเป็นต้องสร้าง' },
       ],
-      choice2: [
-        { no: 1, msg: 'E' },
-        { no: 2, msg: 'Z' },
-        { no: 3, msg: 'G' },
-        { no: 4, msg: 'DA' },
-      ],
+      // choice2: [
+      //   { no: 1, msg: '' },
+      //   { no: 2, msg: '' },
+      //   { no: 3, msg: '' },
+      //   { no: 4, msg: '' },
+      // ],
       dialog: false,
-      lab2_no1: Number,
-      lab2_no2: Number,
+      lab7_no1: Number,
+      // lab7_no2: Number,
       passSign : false,
       checked: true,
       user : {
@@ -207,8 +208,10 @@ export default {
     toLab8() { 
       this.$router.push("/lab8"); 
     },
-    checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 
+    checkResult (LAB7_NO1) {
+      if (LAB7_NO1 == 3) { 
+    // checkResult (LAB7_NO1, LAB7_NO2) {
+    //   if (LAB7_NO1 == 3 && LAB7_NO2 == 1) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 
@@ -225,10 +228,11 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
+      const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
       const saveName = email + "_LAB7Assignment1";
       var metadata = { contentType: this.myFiles.type };
       // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
-      const uploadTask = storage.ref().child(this.email + "/LAB7/" + saveName).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(email + "/LAB7/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -242,7 +246,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB7/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(email + "/LAB7/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-app-bar v-if="logInSign" class="appbar" color="#1976D2" clipped-left app>
-      <v-spacer></v-spacer><v-toolbar-title class="display-1 font-weight-medium mr-0 mr-md-4 v-sheet theme--dark transparent">Nerkwet</v-toolbar-title><v-spacer></v-spacer>
-      <v-toolbar-title>
-        <div v-if="logInSign" class="subtitle-1 font-weight-medium mr-0 mr-md-4 v-sheet theme--dark transparent">
+    <v-app-bar v-if="logInSign" class="appbar" color="#1976D2" app>
+      <v-toolbar-title class="display-1 font-weight-medium flex text-center"><span style="color: white">Nerkwet</span></v-toolbar-title>
+        <div v-if="logInSign" class="subtitle-1">
+          <v-btn v-if="isTa" outlined style="margin-right:10px" color="secondary" @click="toTAPage"><span style="color: white">Teacher Assistant</span></v-btn>
           <v-icon v-on:click="$router.push('/home')" dark style="padding-right: 10px">mdi-home</v-icon>
           <v-menu bottom min-width="200px" rounded offset-y>
             <template v-slot:activator="{ on }">
@@ -26,7 +26,6 @@
             </v-card>
           </v-menu>
         </div>
-      </v-toolbar-title>
     </v-app-bar>
     <div v-if="!logInSign">
       <div class="signning">Welcome to Nerkwet! Please sign in first.<v-btn class="signinbutton" color="#4CAF50" @click="signIn">Sign In</v-btn></div>
@@ -35,14 +34,15 @@
 </template>
 
 <script>
-// import axios from 'axios';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-const gaxios = require('gaxios');
+import { firestore } from  '../main'
+// const gaxios = require('gaxios');
 
 export default {
   data() {
     return {
+      isTa : false,
       logInSign : false,
       info : null,
       infostatus : false,
@@ -64,6 +64,12 @@ export default {
   
   created() {
     firebase.auth().onAuthStateChanged(user => {
+      firestore.collection("TA_Users").get().then((querySnapshot) => {
+        querySnapshot.forEach((document) => {
+          if (document.data().gmail == this.email) {this.isTa = true}
+          // console.log(this.isTa);
+        });
+      });
       this.logInSign = !!user;
       if(user) {
         this.uid = user.uid;
@@ -94,12 +100,12 @@ export default {
         /* console.log("access_Token = " + credential.accessToken);
         console.log("id_Token = " + credential.idToken); */
         
-        gaxios.instance.defaults = {
+        /* gaxios.instance.defaults = {
           baseURL: 'https://classroom.googleapis.com/v1/',
           headers: {
             Authorization: `Bearer ${credential.accessToken}`
           }
-        }
+        } */
 
         // console.log(result);
         this.$router.push("/home");
@@ -113,6 +119,7 @@ export default {
     signOut() {
       try {
         const data = firebase.auth().signOut();
+        this.isTa = false;
         this.$router.push("/");
         console.log(data);
         this.logInSign = false;
@@ -121,6 +128,7 @@ export default {
         console.log(err);
       }
     },
+    toTAPage() { this.$router.push("/ta") }
     // connectToClassroom () {
     //   const url = 'userProfiles/' + this.email;
     //   async function quickstart() {
@@ -152,10 +160,10 @@ export default {
 </script>
 
 <style scoped>
-  .appbar {
+  /* .appbar {
     height: 100%;
     widows: 100%;
-  }
+  } */
   .photoo {
     width: 70%;
     height: 70%;

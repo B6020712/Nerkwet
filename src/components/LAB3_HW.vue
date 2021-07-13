@@ -193,18 +193,31 @@
                 </div>
 
                 <div v-if="passSign">
-                  <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt (ส่งทีละไฟล์)</strong></p>
-                  <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
-                  <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
-                  <v-row>
-                    <v-spacer></v-spacer>
-                    <v-btn color="indigo" @click="toLab3"><v-icon>mdi-arrow-left-bold-box-outline</v-icon>LAB 3</v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary" @click="uploadFile">Upload<v-icon>mdi-file-upload-outline</v-icon></v-btn>
-                    <v-spacer></v-spacer>
-                    <v-btn color="green" @click="toLab4">LAB 4<v-icon>mdi-arrow-right-bold-box-outline</v-icon></v-btn>
-                    <v-spacer></v-spacer>
-                  </v-row>
+                  <div>
+                    <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ Lab31</strong></p>
+                    <template><v-file-input v-model="myFiles1" accept="image/*" @change="handleUpload" label="File input Lab31"></v-file-input></template>
+                    <v-progress-circular v-if="uploadingFile1" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
+                    <v-row>
+                      <v-spacer></v-spacer>
+                      <v-btn color="primary" @click="uploadFile1">Upload<v-icon>mdi-file-upload-outline</v-icon></v-btn>
+                      <v-spacer></v-spacer>
+                    </v-row>
+                  </div>
+
+                  <div style="margin-top:20px">
+                    <p class="subtitle-1 text--primary" style="text-align:center;"><strong>สำหรับส่งไฟล์ Lab32</strong></p>
+                    <template><v-file-input v-model="myFiles2" accept="image/*" @change="handleUpload($event.target.files)" label="File input Lab32"></v-file-input></template>
+                    <v-progress-circular v-if="uploadingFile2" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
+                    <v-row>
+                      <v-spacer></v-spacer>
+                      <v-btn color="indigo" @click="toLab3"><v-icon>mdi-arrow-left-bold-box-outline</v-icon>LAB 3</v-btn>
+                      <v-spacer></v-spacer>
+                      <v-btn color="primary" @click="uploadFile2">Upload<v-icon>mdi-file-upload-outline</v-icon></v-btn>
+                      <v-spacer></v-spacer>
+                      <v-btn color="green" @click="toLab4">LAB 4<v-icon>mdi-arrow-right-bold-box-outline</v-icon></v-btn>
+                      <v-spacer></v-spacer>
+                    </v-row>
+                  </div>
                 </div>
                 <br/>
               </div>
@@ -255,11 +268,13 @@ export default {
         refreshToken : ''
       },
       interval: {},
-      myFiles: null,
+      myFiles1: null,
+      myFiles2: null,
       file: null,
       timevalue: 0,
       uploadValue: 0,
-      uploadingFile: false,
+      uploadingFile1: false,
+      uploadingFile2: false,
     }
   },
   created() {
@@ -323,19 +338,20 @@ export default {
     },
     handleUpload(event) { 
       this.file = "";
-      this.myFiles = event.target.files[0];
+      this.myFiles1 = event.target.files[0];
+      this.myFiles2 = event.target.files[0];
     },
-    uploadFile() {
+    uploadFile1() {
       this.timevalue = 0;
       this.uploadValue = 0;
       const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
       const saveName = email + "_LAB3Assignment1";
-      var metadata = { contentType: this.myFiles.type };
+      var metadata = { contentType: this.myFiles1.type };
       // const uploadTask = storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).put(this.myFiles, metadata);
-      const uploadTask = storage.ref().child(this.email + "/LAB3/" + saveName).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(email + "/LAB3/" + saveName).put(this.myFiles1, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
-        this.uploadingFile = true;
+        this.uploadingFile1 = true;
         this.uploadValue = ( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.interval = setInterval(() => {
           if (this.timevalue == this.uploadValue) {
@@ -345,8 +361,32 @@ export default {
         })
       }, error => { console.log(error.message) },
       () => { 
-        this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB3/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+        this.uploadingFile1 = false; 
+        storage.ref().child(email + "/LAB3/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+      });
+    },
+    uploadFile2() {
+      this.timevalue = 0;
+      this.uploadValue = 0;
+      const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
+      const saveName = email + "_LAB3Assignment2";
+      var metadata = { contentType: this.myFiles2.type };
+      // const uploadTask = storage.ref().child(this.email + "/LAB2/" + this.myFiles.name).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(email + "/LAB3/" + saveName).put(this.myFiles2, metadata);
+      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
+        console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
+        this.uploadingFile2 = true;
+        this.uploadValue = ( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
+        this.interval = setInterval(() => {
+          if (this.timevalue == this.uploadValue) {
+            this.timevalue = 0
+          } 
+          this.timevalue += 1
+        })
+      }, error => { console.log(error.message) },
+      () => { 
+        this.uploadingFile2 = false; 
+        storage.ref().child(email + "/LAB3/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

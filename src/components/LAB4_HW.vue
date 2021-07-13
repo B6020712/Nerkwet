@@ -7,7 +7,7 @@
           <h1 style="text-align: center">Assignment : LAB 4</h1>
           <!-- <div class="text--primary" style="text-align: center"><strong>ไฟล์การบ้าน:</strong> <a :href='downLoadURL'>คลิกเพื่อดาว์นโหลดไฟล์การบ้าน</a></div> -->
           <div style="margin-top: 20px;" align="center" justify="center">
-            <v-img src="@/assets/lab/lab4/lab4Assignment1.png"></v-img><br/>
+            <v-img width="1100" src="@/assets/lab/lab4/lab4Assignment1.png"></v-img><br/>
           </div>
           <div class="headline text--primary labexplan" style="margin-top:10px;">อธิบาย assignment</div>
           <div class="text--primary labexplan" style="margin-top: 2px">
@@ -79,9 +79,10 @@
               </div>
 
               <div v-if="passSign">
-                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
+                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt</strong></p>
                 <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
-                <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{showValueUploading}}</v-progress-circular>
+                <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal"></v-progress-circular>
+                <!-- <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular> -->
                 <v-row>
                   <v-spacer></v-spacer>
                   <v-btn color="indigo" @click="toLab4"><v-icon>mdi-arrow-left-bold-box-outline</v-icon>LAB 4</v-btn>
@@ -112,6 +113,7 @@ export default {
   components: { LoginComponent },
   data() {
     return {
+      uploaded: Boolean,
       downLoadURL: '',
       readyToDoQuest: false,
       name: 'LAB2',
@@ -122,10 +124,10 @@ export default {
         { no: 2, msg: 'ไม่ได้' },
       ],
       choice2: [
-        { no: 1, msg: '' },
-        { no: 2, msg: '' },
-        { no: 3, msg: 'True' },
-        { no: 4, msg: '' },
+        { no: 1, msg: 'PC1 จะไม่สามารถ Ping ไปยัง PC3 ได้' },
+        { no: 2, msg: 'PC1 จะสามารถ Ping ไปยัง PC4 ได้' },
+        { no: 3, msg: 'PC2 จะไม่สามารถ Ping ไปยัง PC4 ได้' },
+        { no: 4, msg: 'PC2 จะสามารถ Ping ไปยัง PC4 ได้ผ่านทาง Interface Fa0/1 ของ Switch0' },
       ],
       dialog: false,
       lab2_no1: Number,
@@ -201,8 +203,7 @@ export default {
       const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
       const saveName = email + "_LAB4Assignment1";
       var metadata = { contentType: this.myFiles.type };
-      // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
-      var uploadTask = storage.ref().child(this.email + "/LAB4/" + saveName).put(this.myFiles, metadata);
+      var uploadTask = storage.ref().child(email + "/LAB4/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         // console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -220,10 +221,10 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB4/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(email + "/LAB4/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
-    requestQuest() { this.readyToDoQuest = true; },
+    requestQuest() { this.readyToDoQuest = true },
   }
 };
 </script>

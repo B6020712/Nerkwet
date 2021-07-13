@@ -25,8 +25,6 @@
         <v-stepper-step complete editable step="7">5</v-stepper-step>
         <v-divider></v-divider>
         <v-stepper-step complete editable step="8">6</v-stepper-step>
-        <v-divider></v-divider>
-        <v-stepper-step complete editable step="9">Test</v-stepper-step>
       </v-stepper-header>
 
       <v-row align="center" justify="center">
@@ -271,164 +269,26 @@
                 <v-img max-width="700" min-height="100" src="@/assets/lab/lab1/lab1-9.png"></v-img><br/>
               </p>
             </v-card-subtitle>
-            <v-btn color="primary" @click="e1 = 9">Next</v-btn>
             <v-btn text @click="e1 = 7">Back</v-btn>
-          </v-stepper-content>
-
-          <v-stepper-content step="9">
-            <v-card-subtitle>
-              <v-radio-group v-model="lab1config_no1">
-                <p class="subtitle-1 text--primary"><strong>คำถามเกี่ยวกับการ config</strong></p>
-                <div>1. แลปนี้ใช้ Router รุ่นใดในการสาธิต</div>
-                <template v-slot:label>
-                </template>
-                <v-radio value=1>
-                  <template v-slot:label>
-                    <div>ISR4331</div>
-                  </template>
-                </v-radio>
-                <v-radio value=2>
-                  <template v-slot:label>
-                    <div>ISR4321</div>
-                  </template>
-                </v-radio>
-                <v-radio value=3>
-                  <template v-slot:label>
-                    <div>ISR4311</div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
-
-              <v-radio-group v-model="lab1config_no2">
-                <div>2. คำสั่งที่ใช้ในการเขียน running-config ที่กำลัง run อยู่บน Router เขียนไปยัง startup-config ที่อยู่บน NVRAM</div>
-                <template v-slot:label>
-                </template>
-                <v-radio value=1>
-                  <template v-slot:label>
-                    <div>R1# copy running-config to startup-config</div>
-                  </template>
-                </v-radio>
-                <v-radio value=2>
-                  <template v-slot:label>
-                    <div>R1# copy running-config startup-config</div>
-                  </template>
-                </v-radio>
-                <v-radio value=3>
-                  <template v-slot:label>
-                    <div>R1# running-config copy startup-config</div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
-
-              <v-radio-group v-model="lab1config_no3">
-                <div>3. คำสั่งใดที่ใช้ดูค่าทั้งหมดที่เรา config ให้กับอุปกรณ์</div>
-                <template v-slot:label>
-                </template>
-                <v-radio value=1>
-                  <template v-slot:label>
-                    <div>R1# show all configurations</div>
-                  </template>
-                </v-radio>
-                <v-radio value=2>
-                  <template v-slot:label>
-                    <div>R1# show running-config</div>
-                  </template>
-                </v-radio>
-                <v-radio value=3>
-                  <template v-slot:label>
-                    <div>R1# show writing-config</div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
-
-              <v-radio-group v-model="lab1config_no4">
-                <div>4. คำสั่ง enable เป็นคำสั่งเพื่อเข้าสู่โหมดใด</div>
-                <template v-slot:label>
-                </template>
-                <v-radio value=1>
-                  <template v-slot:label>
-                    <div>User Mode</div>
-                  </template>
-                </v-radio>
-                <v-radio value=2>
-                  <template v-slot:label>
-                    <div>Privileged Mode</div>
-                  </template>
-                </v-radio>
-                <v-radio value=3>
-                  <template v-slot:label>
-                    <div>Global Configuration Mode</div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
-
-              <v-radio-group v-model="lab1config_no5">
-                <div>5. คำสั่งใดที่ใช้เพื่อเข้าไป config Interface GigabitEthernet 0/0/0</div>
-                <template v-slot:label>
-                </template>
-                <v-radio value=1>
-                  <template v-slot:label>
-                    <div>R1(config)# config interface g0/0/0</div>
-                  </template>
-                </v-radio>
-                <v-radio value=2>
-                  <template v-slot:label>
-                    <div>R1(config)# config g0/0/0</div>
-                  </template>
-                </v-radio>
-                <v-radio value=3>
-                  <template v-slot:label>
-                    <div>R1(config)# interface g0/0/0</div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
-
-              <v-radio-group v-model="lab1config_no6">
-                <div>6. เมื่อเราพิมพ์คำสั่งผิดทำให้หน้าต่าง CLI ค้าง ไม่สามารถพิมพ์อะไรได้และเราต้องการที่จะยกเลิกคำสั่ง วิธีแก้ไขที่ควรทำคือวิธีใด</div>
-                <template v-slot:label>
-                </template>
-                <v-radio value=1>
-                  <template v-slot:label>
-                    <div>กด Ctrl + Shift + 6</div>
-                  </template>
-                </v-radio>
-                <v-radio value=2>
-                  <template v-slot:label>
-                    <div>ปิดหน้าต่างและเปิดใหม่</div>
-                  </template>
-                </v-radio>
-                <v-radio value=3>
-                  <template v-slot:label>
-                    <div>ปิดสวิตซ์ของอุปกรณ์และเปิดใหม่</div>
-                  </template>
-                </v-radio>
-              </v-radio-group>
-
-              <v-btn color="red" @click="saveResult(lab1config_no1, lab1config_no2, lab1config_no3, lab1config_no4, lab1config_no5, lab1config_no6)">Check</v-btn>
-              <p></p><v-divider></v-divider><br/>
-              <div class="d-flex justify-space-around mb-6 outlined">
-                <div class="pa-2 outlined">
-                  <v-btn color="white" @click="e1 = 7">Back</v-btn>
-                </div>
-                <div class="pa-2 outlined">
-                  <v-btn color="green" @click="e1 = 1">Back to Step 1</v-btn>
-                </div>
-                <div class="pa-2 outlined">
-                  <v-btn color="primary" @click="toLab2">LAB 2</v-btn>
-                </div>
-              </div>
-            </v-card-subtitle>
           </v-stepper-content>
         </v-stepper-items>
       </v-row>
     </v-stepper>
+    <v-card-subtitle>
+      <div class="d-flex justify-space-around mb-6 outlined">
+        <v-spacer></v-spacer>
+        <v-btn color="primary" @click="toLab2">LAB 2</v-btn>
+        <v-spacer></v-spacer>
+        <v-btn @click="gotoHomework" color="green">Homework</v-btn>
+        <v-spacer></v-spacer>
+      </div>
+    </v-card-subtitle>
   </v-card>
 </template>
 
 <script>
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
-import { db } from '../main'
 
 export default {
   data() {
@@ -436,12 +296,6 @@ export default {
       e1: 1,
       altLabels: true,
       radios: 'True',
-      lab1config_no1: Number,
-      lab1config_no2: Number,
-      lab1config_no3: Number,
-      lab1config_no4: Number,
-      lab1config_no5: Number,
-      lab1config_no6: Number,
       user : {email : ''},
     }
   },
@@ -454,14 +308,10 @@ export default {
     })
   },
   methods: {
+    gotoHomework() { this.$router.push('/lab1_hw'); },
     toLab2() {
       this.$router.push("/lab2");
     },
-    saveResult (LAB1CONFIG_NO1, LAB1CONFIG_NO2, LAB1CONFIG_NO3, LAB1CONFIG_NO4, LAB1CONFIG_NO5, LAB1CONFIG_NO6) {
-      const createdAt = new Date()
-      db.collection("user").doc(this.email).collection("lab1")
-      .add({ LAB1CONFIG_NO1, LAB1CONFIG_NO2, LAB1CONFIG_NO3, LAB1CONFIG_NO4, LAB1CONFIG_NO5, LAB1CONFIG_NO6, createdAt })
-    }
   }
 };
 </script>

@@ -5,19 +5,29 @@
         <v-card class="mx-auto">
           <br/>
           <h1 style="text-align: center">Assignment : LAB 2</h1>
-          <div class="text--primary" style="text-align: center"><strong>ไฟล์การบ้าน:</strong> <a :href='downLoadURL'>คลิกเพื่อดาว์นโหลดไฟล์การบ้าน</a></div>
-          <div style="margin-top: 20px;" align="center" justify="center">
-            <!-- <v-img src="@/assets/lab/lab6/lab6Assignment1.png"></v-img> -->
-          </div>
           <div class="headline text--primary labexplan" style="margin-top:10px;">อธิบาย assignment</div>
           <div class="text--primary labexplan">
-          </div>
-          <div class="text--primary labexplan2">
+            1.ใช้การกำหนดค่าของบริษัท A ตาม LAB 2 (แต่ Router ของบริษัท A เปลี่ยนรุ่น) และให้เพิ่มบริษัท B ซึ่งได้ร้องขอ block of address จากบริษัท A โดยทางบริษัท A ได้จัดสรร IP ให้กับ
+            บริษัท B จำนวน 512 IP Addresses ด้วย block of addresses เริ่มที่ 172.16.100.0/23 บริษัท B มีทั้งหมด 2 สาขาย่อย
           </div>
           <div class="text--primary labexplan3">
+            <b>สาขาที่ 3 มีจำนวน Host ทั้งหมด 220 เครื่อง</b><br/>
+            <b>สาขาที่ 4 มีจำนวน Host ทั้งหมด 100 เครื่อง</b>
+          </div>
+          <div class="text--primary labexplan">
+            2.ที่บริษัท B ให้ทำการจัดสรร IP ให้กับ สาขาที่ 3 และ สาขาที่ 4 โดยให้ <br/>
+          </div>
+          <div class="text--primary labexplan2">
+            a. จัดสรร IP address ให้กับ interface ของ router แต่ละสาขาเป็น IP address แรกที่ใช้ได้<br/>
+            b. ถัดมาจึงจัดสรร IP address ให้กับ PC ทั้งสองของสาขานั้นๆ โดยให้ PC เครื่องใดก็ได้มี IP address ที่เป็นเลขสุดท้ายที่ใช้ได้(ไม่นับ Broadcast address)<br/>
+            c. หลังจากจัดสรร IP address ให้ PC แล้วให้กำหนด Default gateway ที่ PC แต่ละตัวเป็น IP address จาก Interface ของ Router ที่สาขานั้นๆ เชื่อมต่ออยู่ (g0/0 ของสาขา1 และ g0/1 ของสาขา2)<br/>
+            d. IP address ของบริษัท B เริ่มตั้งแต่ 172.16.100.1 เป็นต้นไป<br/>
+            e. โดย PC ของบริษัท B ทั้งสาขาที่ 3 และ 4 จะต้องสามารถ ping ไปยัง Router ของบริษัท A ได้<br/>
+            Note: เริ่ม ping ครั้งแรกอาจจะไม่สำเร็จ ให้ลอง ping ซ้ำอีกครั้ง (อุปกรณ์กำลังเรียนรู้)
           </div>
           <div class="headline text--primary labexplan" style="margin-top: 15px">สิ่งที่ต้องการ</div>
           <div class="text--primary labexplan">
+            ทำตามคำอธิบายด้านบน บันทึกเป็นไฟล์ .pkt และอัพโหลดไฟล์
           </div>
           <br/>
         </v-card>
@@ -88,19 +98,19 @@ export default {
       downLoadURL: '',
       readyToDoQuest: false,
       name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. ' },
-      quest2: { title: 'lab2_no2', headermsg: '2. ' },
+      quest1: { title: 'lab2_no1', headermsg: '1. ข้อใดคือความแตกต่างของ enable password กับ enable secret' },
+      quest2: { title: 'lab2_no2', headermsg: '2. หากต้องการตั้งค่า gateway ให้กับ PC ต้องทำอย่างไร' },
       choice1: [
-        { no: 1, msg: '' },
-        { no: 2, msg: '' },
-        { no: 3, msg: '' },
-        { no: 4, msg: '' },
+        { no: 1, msg: 'enable password ผ่านการ encoding ส่วน enable secret ไม่ผ่านการ encoding' },
+        { no: 2, msg: 'enable password ผ่านการเข้ารหัสแบบ SHA256 ส่วน enable secret ผ่านการเข้ารหัสแบบ SHA512' },
+        { no: 3, msg: 'enable password ไม่ผ่านการ encoding ส่วน enable secret ผ่านการ encoding' },
+        { no: 4, msg: 'enable password ผ่านการเข้ารหัสแบบ SHA512 ส่วน enable secret ผ่านการเข้ารหัสแบบ SHA256' },
       ],
       choice2: [
-        { no: 1, msg: '' },
-        { no: 2, msg: '' },
-        { no: 3, msg: '' },
-        { no: 4, msg: '' },
+        { no: 1, msg: 'คลิกที่รูป PC ที่ต้องการ => หน้าต่าง Config => FastEthernet0 => Gateway' },
+        { no: 2, msg: 'คลิกที่รูป PC ที่ต้องการ => หน้าต่าง Config => Bluetooth => Gateway' },
+        { no: 3, msg: 'คลิกที่รูป PC ที่ต้องการ => หน้าต่าง Config => Setting => Gateway' },
+        { no: 4, msg: 'คลิกที่รูป PC ที่ต้องการ => หน้าต่าง Config => Algorithm Settings => Gateway' },
       ],
       dialog: false,
       lab2_no1: Number,
@@ -121,24 +131,6 @@ export default {
   },
   created() {
     firebase.auth().onAuthStateChanged(user => {
-      var starsRef = storage.ref().child('labAssignment/Lab6_Std.pkt'); //อย่าลืมแก้
-      starsRef.getDownloadURL()
-      .then((url) => {
-        this.downLoadURL = url;
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case 'storage/object-not-found':
-            break;
-          case 'storage/unauthorized':
-            break;
-          case 'storage/canceled':
-            break;
-          case 'storage/unknown':
-            break;
-        }
-      });
-      
       this.logInSign = !!user;
       if(user) {
         this.email = user.email;
@@ -150,7 +142,7 @@ export default {
     toLab2() { this.$router.push("/lab2") },
     toLab3() { this.$router.push("/lab3") },
     checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 4 && LAB2_NO2 == 3) { 
+      if (LAB2_NO1 == 3 && LAB2_NO2 == 3) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 
@@ -167,10 +159,11 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
-      const saveName = email + "_LAB6Assignment1";
+      const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
+      const saveName = email + "_LAB2Assignment1";
       var metadata = { contentType: this.myFiles.type };
       // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
-      const uploadTask = storage.ref().child(this.email + "/LAB6/" + saveName).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(email + "/LAB2/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -184,7 +177,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB6/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(email + "/LAB2/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

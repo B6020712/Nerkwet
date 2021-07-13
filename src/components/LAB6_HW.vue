@@ -110,7 +110,7 @@
               </div>
 
               <div v-if="passSign">
-                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
+                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt</strong></p>
                 <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
                 <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
                 <v-row>
@@ -151,8 +151,8 @@ export default {
       downLoadURL: '',
       readyToDoQuest: false,
       name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. หาก tracert จาก PC0 ไปยัง PC1 จะผ่านเส้นทางเหมือนกับข้อใด' },
-      quest2: { title: 'lab2_no2', headermsg: '2. จาก PC0 ไปยัง PC2 ข้อใดต่อไปนี้มีค่า Cost มากที่สุด' },
+      quest1: { title: 'lab6_no1', headermsg: '1. หาก tracert จาก PC0 ไปยัง PC1 จะผ่านเส้นทางเหมือนกับข้อใด' },
+      quest2: { title: 'lab6_no2', headermsg: '2. จาก PC0 ไปยัง PC2 ข้อใดต่อไปนี้มีค่า Cost มากที่สุด' },
       choice1: [
         { no: 1, msg: '192.168.10.254 => 1.1.5.2 => 192.168.11.2' },
         { no: 2, msg: '192.168.10.254 => 1.1.4.2 => 1.1.3.1 => 192.168.11.2' },
@@ -166,8 +166,8 @@ export default {
         { no: 4, msg: '192.168.10.254 => 1.1.5.2 => 1.92.168.11.2' },
       ],
       dialog: false,
-      lab2_no1: Number,
-      lab2_no2: Number,
+      lab6_no1: Number,
+      lab6_no2: Number,
       passSign : false,
       checked: true,
       user : {
@@ -216,8 +216,8 @@ export default {
     toLab7() { 
       this.$router.push("/lab7"); 
     },
-    checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 4 && LAB2_NO2 == 3) { 
+    checkResult (LAB6_NO1, LAB6_NO2) {
+      if (LAB6_NO1 == 4 && LAB6_NO2 == 3) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 
@@ -234,10 +234,11 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
+      const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
       const saveName = email + "_LAB6Assignment1";
       var metadata = { contentType: this.myFiles.type };
       // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
-      const uploadTask = storage.ref().child(this.email + "/LAB6/" + saveName).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(email + "/LAB6/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -251,7 +252,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB6/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(email + "/LAB6/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

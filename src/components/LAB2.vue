@@ -60,8 +60,8 @@
                 <v-spacer></v-spacer>
                 <v-btn @click="labcommand" color="primary">Command</v-btn>
                 <v-spacer></v-spacer>
-                <!-- <v-btn @click="gotoHomework" color="primary">Homework</v-btn>
-                <v-spacer></v-spacer> -->
+                <v-btn @click="gotoHomework" color="green">Homework</v-btn>
+                <v-spacer></v-spacer>
               </div>
 
               <div v-if="result">
@@ -183,7 +183,7 @@ export default {
     }
   },
   created() {
-    console.log("access token from login comp = ")
+    // console.log("access token from login comp = ")
     firebase.auth().onAuthStateChanged(user => {
       var lab2_Student = storage.ref().child('lab/lab2_Student.pkt');
       lab2_Student.getDownloadURL()
@@ -221,6 +221,7 @@ export default {
     })
   },
   methods: {
+    gotoHomework() { this.$router.push('/lab2_hw'); },
     toLab3() { 
       this.$router.push("/lab3"); 
     },

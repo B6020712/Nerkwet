@@ -51,7 +51,7 @@
               </div>
 
               <div v-if="passSign">
-                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
+                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt</strong></p>
                 <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
                 <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
                 <v-row>
@@ -86,24 +86,24 @@ export default {
     return {
       downLoadURL: '',
       readyToDoQuest: false,
-      name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. Right Group เป็น Classful แบบใด' },
-      quest2: { title: 'lab2_no2', headermsg: '2. Left Group เป็น Classful แบบใด' },
+      name: 'LAB5',
+      quest1: { title: 'lab5_no1', headermsg: '1. คำสั่งใดคือการกำหนด ip address และ subnet mask ให้กับ Gig0/2 ของ Router3' },
+      quest2: { title: 'lab5_no2', headermsg: '2. จำนวน Hop มีผลต่อการส่ง Packet จากต้นทางไปยังปลายทางอย่างไร' },
       choice1: [
-        { no: 1, msg: 'A' },
-        { no: 2, msg: 'B' },
-        { no: 3, msg: 'C' },
-        { no: 4, msg: 'D' },
+        { no: 1, msg: 'Router(config-if)# ip address 203.1.1.1 255.255.255.0' },
+        { no: 2, msg: 'Router(config)# ip address 203.1.1.1 255.255.255.0' },
+        { no: 3, msg: 'Router(config-if)# ip address 203.1.1.1 11111111.11111111.11111111.00000000' },
+        { no: 4, msg: 'Router(config)# ip address 203.1.1.1 00000000.00000000.00000000.11111111' },
       ],
       choice2: [
-        { no: 1, msg: 'E' },
-        { no: 2, msg: 'Z' },
-        { no: 3, msg: 'G' },
-        { no: 4, msg: 'DA' },
+        { no: 1, msg: 'เมื่อจำนวน hop เยอะขึ้นจะทำให้ latency time ในการส่งเพิ่มขึ้นด้วย' },
+        { no: 2, msg: 'เมื่อจำนวน hop เยอะขึ้นจะทำให้ latency time ในการส่งลดลง' },
+        { no: 3, msg: 'เมื่อจำนวน hop เยอะขึ้นจะทำให้ latency time ในการส่งเท่าเดิม' },
+        { no: 4, msg: 'ไม่ส่งผลอะไรเลย เนื่องจากจำนวน hop ไม่เกี่ยวข้องกับ latency time ในการส่ง Packet อยู่แล้ว' },
       ],
       dialog: false,
-      lab2_no1: Number,
-      lab2_no2: Number,
+      lab5_no1: Number,
+      lab5_no2: Number,
       passSign : false,
       checked: true,
       user : {
@@ -152,8 +152,8 @@ export default {
     toLab6() { 
       this.$router.push("/lab6"); 
     },
-    checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 
+    checkResult (LAB5_NO1, LAB5_NO2) {
+      if (LAB5_NO1 == 1 && LAB5_NO2 == 1) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 
@@ -174,7 +174,8 @@ export default {
       const saveName = email + "_LAB5Assignment1";
       var metadata = { contentType: this.myFiles.type };
       // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
-      const uploadTask = storage.ref().child(this.email + "/LAB5/" + saveName).put(this.myFiles, metadata);
+      // const uploadTask = storage.ref().child(this.email + "/LAB5/" + saveName).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(email + "/LAB5/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -188,7 +189,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB5/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(email + "/LAB5/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },

@@ -202,7 +202,7 @@
               </div>
 
               <div v-if="passSign">
-                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt ไปที่ Classroom</strong></p>
+                <p class="subtitle-1 text--primary" style="text-align: center"><strong>สำหรับส่งไฟล์ .pkt</strong></p>
                 <template><v-file-input v-model="myFiles" accept="image/*" @change="handleUpload($event.target.files)" label="File input"></v-file-input></template>
                 <v-progress-circular v-if="uploadingFile" :value="timevalue" :rotate="360" :width="2" color="teal">{{timevalue}}</v-progress-circular>
                 <v-row>
@@ -242,24 +242,24 @@ export default {
       showCommand6: false,
       showCommand7: false,
       readyToDoQuest: false,
-      name: 'LAB2',
-      quest1: { title: 'lab2_no1', headermsg: '1. Right Group เป็น Classful แบบใด' },
-      quest2: { title: 'lab2_no2', headermsg: '2. Left Group เป็น Classful แบบใด' },
+      name: 'LAB9',
+      quest1: { title: 'lab9_no1', headermsg: '1. ถ้าเปิด Web browser โดยใช้ PC4 ต้องกำหนด URL คืออะไรที่สามารถเปิดหน้าเว็บ cpe.sut.ac.th ได้' },
+      quest2: { title: 'lab9_no2', headermsg: '2. PC2 และ DNS Server ทำการ ftp ไปยัง 100.100.200.2 สำเร็จหรือไม่' },
       choice1: [
-        { no: 1, msg: 'A' },
-        { no: 2, msg: 'B' },
-        { no: 3, msg: 'C' },
-        { no: 4, msg: 'D' },
+        { no: 1, msg: '100.100.200.2' },
+        { no: 2, msg: 'cpe.sut.ac.th' },
+        { no: 3, msg: 'www.cpe.sut.ac.th' },
+        { no: 4, msg: 'http://cpe.sut.ac.th' },
       ],
       choice2: [
-        { no: 1, msg: 'E' },
-        { no: 2, msg: 'Z' },
-        { no: 3, msg: 'G' },
-        { no: 4, msg: 'DA' },
+        { no: 1, msg: 'ทั้ง PC2 และ DNS Server ไม่สามารถ ftp ได้สำเร็จ' },
+        { no: 2, msg: 'ทั้ง PC2 และ DNS Server สามารถ ftp ได้สำเร็จ' },
+        { no: 3, msg: 'PC2 ไม่สำเร็จแต่ DNS Server สำเร็จ' },
+        { no: 4, msg: 'PC2 สำเร็จแต่ DNS Server ไม่สำเร็จ' },
       ],
       dialog: false,
-      lab2_no1: Number,
-      lab2_no2: Number,
+      lab9_no1: Number,
+      lab9_no2: Number,
       passSign : false,
       checked: true,
       user : {
@@ -307,8 +307,8 @@ export default {
     showCommand5Med() { this.showCommand5 = (this.showCommand5 == true) ? false : true },
     showCommand6Med() { this.showCommand6 = (this.showCommand6 == true) ? false : true },
     showCommand7Med() { this.showCommand7 = (this.showCommand7 == true) ? false : true },
-    checkResult (LAB2_NO1, LAB2_NO2) {
-      if (LAB2_NO1 == 3 && LAB2_NO2 == 1) { 
+    checkResult (LAB9_NO1, LAB9_NO2) {
+      if (LAB9_NO1 == 1 && LAB9_NO2 == 3) { 
         this.passSign = true;
         this.checked = false;
         return console.log("Pass. Good Job! You can sent .pkt file"); 
@@ -325,10 +325,11 @@ export default {
     uploadFile() {
       this.timevalue = 0;
       this.uploadValue = 0;
+      const email = this.email.split('@')[0]; //ต้องการเซฟแค่หน้า @
       const saveName = email + "_LAB9Assignment1";
       var metadata = { contentType: this.myFiles.type };
       // const uploadTask = storage.ref().child(this.email + "/LAB4/" + this.myFiles.name).put(this.myFiles, metadata);
-      const uploadTask = storage.ref().child(this.email + "/LAB9/" + saveName).put(this.myFiles, metadata);
+      const uploadTask = storage.ref().child(email + "/LAB9/" + saveName).put(this.myFiles, metadata);
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
         console.log( snapshot.bytesTransferred / snapshot.totalBytes ) * 100;
         this.uploadingFile = true;
@@ -342,7 +343,7 @@ export default {
       }, error => { console.log(error.message) },
       () => { 
         this.uploadingFile = false; 
-        storage.ref().child(this.email + "/LAB9/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
+        storage.ref().child(email + "/LAB9/" + saveName).getDownloadURL().then(function(url) { console.log(url); });
       });
     },
     requestQuest() { this.readyToDoQuest = true; },
