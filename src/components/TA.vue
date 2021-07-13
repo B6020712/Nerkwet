@@ -98,7 +98,6 @@ export default {
         })
         this.studentAllCount = this.studentAll.length - 2
 
-        /* ติดตรง loop หายไป 1 url คือ lab 4 */
         for (let j = 0 ; j < this.studentAllCount ; j++) {
           this.showLabURL[j] = []
           for (let i = 1, k = 1 ; i <= 9 ; i++, k++) {
@@ -106,23 +105,18 @@ export default {
             let saveName = this.studentAll[j] + "_LAB" + i + "Assignment1";
             let saveName2 = this.studentAll[j] + "_LAB" + i + "Assignment2";
             if ( i == 3 ) {
-              storage.ref().child(this.studentAll[j] + "/LAB" + i + "/" + saveName).getDownloadURL().then(url => {
-                this.showLabURL[j][3] = url;
-              }).catch(err => {
-                this.showLabURL[j][3] = null;
-              })
-              storage.ref().child(this.studentAll[j] + "/LAB" + i + "/" + saveName2).getDownloadURL().then(url => {
-                this.showLabURL[j][4] = url;
-              }).catch(err => {
-                this.showLabURL[j][4] = null;
-              })
+              storage.ref().child(this.studentAll[j] + "/LAB" + i + "/" + saveName).getDownloadURL()
+              .then( url => { this.showLabURL[j][3] = url })
+              .catch( err => { this.showLabURL[j][3] = null })
+              storage.ref().child(this.studentAll[j] + "/LAB" + i + "/" + saveName2).getDownloadURL()
+              .then( url => { this.showLabURL[j][4] = url })
+              .catch( err => { this.showLabURL[j][4] = null })
+              /* เนื่องจาก LAB3 มี 2 ไฟล์ จึงต้องเพิ่มจำนวน K ให้มากกว่า I 1 ค่า */ 
               k = 4;
             } else {
-              storage.ref().child(this.studentAll[j] + "/LAB" + i + "/" + saveName).getDownloadURL().then(url => {
-                this.showLabURL[j][k] = url;
-              }).catch(err => { 
-                this.showLabURL[j][k] = null;
-              })
+              storage.ref().child(this.studentAll[j] + "/LAB" + i + "/" + saveName).getDownloadURL()
+              .then( url => { this.showLabURL[j][k] = url })
+              .catch( err => { this.showLabURL[j][k] = null })
             }
           }
         }
